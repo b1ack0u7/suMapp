@@ -1,0 +1,57 @@
+{"user":"axelmontes@hotmail.com", "pass":"123456", "api":"https://run.mocky.io/v3/6151d88d-b7a2-4183-bf59-15cc5033bbef"}
+
+{
+   "regions":[
+      {
+         "name":"Bajio"
+      },
+      {
+         "name":"Norte"
+      },
+      {
+         "name":"Occidente"
+      }
+   ],
+   "dataform":[
+      {
+         "functype":"checkBox",
+         "parameters":"Multimedia AG (o turbiedad):2:OK,IRREGULAR:1"
+      },
+      {
+         "functype":"checkBox",
+         "parameters":"Carbon Activado (o cloro):2:OK,IRREGULAR:1"
+      },
+      {
+         "functype":"checkBox",
+         "parameters":"Resina (o 100 PPM dureza):2:OK,IRREGULAR:1"
+      },
+      {
+         "functype":"listField",
+         "parameters":"Nivel de sal inicial:3:Un tercio,Dos tercios,Tres tercios:1"
+      },
+      {
+         "functype":"photo",
+         "parameters":""
+      },
+      {
+         "functype":"listField",
+         "parameters":"Recargas de bultos de sal:10:#Sequence:1"
+      },
+      {
+         "functype":"listField",
+         "parameters":"Nivel de sal final:3:Un tercio,Dos tercios,Tres tercios:1"
+      },
+      {
+         "functype":"photo",
+         "parameters":""
+      },
+      {
+         "functype":"stepper",
+         "parameters":"Retrolavado suavizador:#Nolimit"
+      },
+      {
+         "functype":"stepper",
+         "parameters":"Retrolavado carbon:#Nolimit,#Aplicable"
+      }
+   ]
+}

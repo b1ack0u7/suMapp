@@ -21,7 +21,7 @@ struct FormsVW: View {
     var body: some View {
         NavigationView {
             List(items[0].regions!.indices) { i in
-                NavigationLink(items[0].regions![i].name, destination: DetailedFormVW(dataForm: dataForm))
+                NavigationLink(items[0].regions![i].name, destination: DetailedFormVW(region: items[0].regions![i].name, dataForm: dataForm))
                     .listRowBackground(Color("Color menu"))
             }
             .disabled(inteliBlock)

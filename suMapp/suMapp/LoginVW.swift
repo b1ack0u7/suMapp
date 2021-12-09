@@ -17,20 +17,19 @@ struct LoginVW: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Item.entity(), sortDescriptors: [], animation: .default) private var items: FetchedResults<Item>
     
-    enum Field {
+    private enum Field {
         case user
         case pass
     }
     
     @State private var userData:UserData = UserData()
-    //@State private var dataForm:STCdataApi = STCdataApi()
     @State private var isLoading:Bool = false
     @State private var inteliBlock:Bool = false
     @State private var showError:Bool = false
     @Binding var showLoggin:Bool
     @FocusState private var focusField: Field?
     
-    private let apiURL:String = "https://run.mocky.io/v3/1aae8b05-a093-433d-a9f2-366ca7742d82"
+    private let apiURL:String = "https://run.mocky.io/v3/40196197-d9f6-4e7b-8fbc-8ed8efb0df4f"
     
     var body: some View {
         ZStack {

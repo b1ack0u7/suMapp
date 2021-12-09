@@ -22,6 +22,7 @@
 		77A11E26275EEF780037AB78 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A11E25275EEF780037AB78 /* Persistence.swift */; };
 		77A11E29275EEF780037AB78 /* suMapp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77A11E27275EEF780037AB78 /* suMapp.xcdatamodeld */; };
 		77E786D1275F05010007651D /* myClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77E786D0275F05010007651D /* myClasses.swift */; };
+		77EE380427624E78004A683E /* JSON in Resources */ = {isa = PBXBuildFile; fileRef = 77EE380327624E78004A683E /* JSON */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		77A11E25275EEF780037AB78 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		77A11E28275EEF780037AB78 /* suMapp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = suMapp.xcdatamodel; sourceTree = "<group>"; };
 		77E786D0275F05010007651D /* myClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myClasses.swift; sourceTree = "<group>"; };
+		77EE380327624E78004A683E /* JSON */ = {isa = PBXFileReference; lastKnownFileType = text; path = JSON; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 		7713FA2B2761989F00C333C8 /* Modules Form */ = {
 			isa = PBXGroup;
 			children = (
+				77EE380327624E78004A683E /* JSON */,
 				7703548B276191C000B472DF /* DetailedFormVW.swift */,
 			);
 			path = "Modules Form";
@@ -187,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77A11E24275EEF780037AB78 /* Preview Assets.xcassets in Resources */,
+				77EE380427624E78004A683E /* JSON in Resources */,
 				77A11E21275EEF780037AB78 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
