@@ -3,9 +3,8 @@
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
         <attribute name="form" optional="YES" attributeType="Transformable" customClassName="[Form]"/>
         <attribute name="regions" optional="YES" attributeType="Transformable" customClassName="[Regions]"/>
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="74"/>
+        <element name="Item" positionX="-63" positionY="-18" width="128" height="59"/>
     </elements>
 </model>

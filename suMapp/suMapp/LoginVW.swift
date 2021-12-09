@@ -182,6 +182,7 @@ struct LoginVW: View {
                 DispatchQueue.main.async {
                     isLoading = false
                     if(decoded.user == userData.user && decoded.pass == userData.pass) {
+                        userData.api = decoded.api
                         fetchForm()
                     }
                     else {
