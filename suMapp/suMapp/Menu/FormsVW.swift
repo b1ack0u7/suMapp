@@ -10,6 +10,13 @@ import SwiftUI
 struct FormsVW: View {
     init() {
         UITableView.appearance().backgroundColor = UIColor(Color("Color BG"))
+        
+        //Resources: NavigationView Style
+        //https://www.bigmountainstudio.com/community/public/posts/80041-how-do-i-customize-the-navigationview-in-swiftui
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = UIColor(Color("Color BG"))
+        UINavigationBar.appearance().standardAppearance = appearance
     }
     
     @Environment(\.managedObjectContext) private var viewContext

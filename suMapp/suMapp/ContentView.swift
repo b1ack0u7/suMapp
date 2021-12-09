@@ -74,6 +74,9 @@ struct ContentView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: 70, alignment: .center)
             }
+            .onAppear {
+                
+            }
             .transition(AnyTransition.opacity.animation(.easeInOut))
         }
 

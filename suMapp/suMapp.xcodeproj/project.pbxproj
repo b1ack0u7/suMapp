@@ -15,6 +15,7 @@
 		771122AE27606A3E007F92EC /* AlertsVW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771122AD27606A3E007F92EC /* AlertsVW.swift */; };
 		771122B127606A7B007F92EC /* SettingsVW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771122B027606A7B007F92EC /* SettingsVW.swift */; };
 		771C653C275FA70B004486F5 /* SQL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771C653B275FA70B004486F5 /* SQL.swift */; };
+		7732037B276295A300987489 /* CheckBoxMD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7732037A276295A300987489 /* CheckBoxMD.swift */; };
 		77A11E1D275EEF750037AB78 /* suMappApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A11E1C275EEF750037AB78 /* suMappApp.swift */; };
 		77A11E1F275EEF750037AB78 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A11E1E275EEF750037AB78 /* ContentView.swift */; };
 		77A11E21275EEF780037AB78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77A11E20275EEF780037AB78 /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 		771122AD27606A3E007F92EC /* AlertsVW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsVW.swift; sourceTree = "<group>"; };
 		771122B027606A7B007F92EC /* SettingsVW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVW.swift; sourceTree = "<group>"; };
 		771C653B275FA70B004486F5 /* SQL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQL.swift; sourceTree = "<group>"; };
+		7732037A276295A300987489 /* CheckBoxMD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxMD.swift; sourceTree = "<group>"; };
 		77A11E19275EEF750037AB78 /* suMapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = suMapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77A11E1C275EEF750037AB78 /* suMappApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = suMappApp.swift; sourceTree = "<group>"; };
 		77A11E1E275EEF750037AB78 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 			children = (
 				771122A9276069EE007F92EC /* HomeVW.swift */,
 				771122AB27606A06007F92EC /* FormsVW.swift */,
+				7703548B276191C000B472DF /* DetailedFormVW.swift */,
 				7713FA2B2761989F00C333C8 /* Modules Form */,
 				771122AD27606A3E007F92EC /* AlertsVW.swift */,
 				771122B027606A7B007F92EC /* SettingsVW.swift */,
@@ -72,7 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				77EE380327624E78004A683E /* JSON */,
-				7703548B276191C000B472DF /* DetailedFormVW.swift */,
+				7732037A276295A300987489 /* CheckBoxMD.swift */,
 			);
 			path = "Modules Form";
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				771122B127606A7B007F92EC /* SettingsVW.swift in Sources */,
 				77A11E26275EEF780037AB78 /* Persistence.swift in Sources */,
 				771122AC27606A06007F92EC /* FormsVW.swift in Sources */,
+				7732037B276295A300987489 /* CheckBoxMD.swift in Sources */,
 				7703548C276191C000B472DF /* DetailedFormVW.swift in Sources */,
 				77A11E29275EEF780037AB78 /* suMapp.xcdatamodeld in Sources */,
 				77E786D1275F05010007651D /* myClasses.swift in Sources */,

@@ -8,15 +8,15 @@
 import Foundation
 
 struct STCdataApi: Decodable {
-    var regions:[STCinnerRegion]?
-    var dataform:[STCinnerDataForm]?
+    var regions:[STCinnerRegionAPI]?
+    var dataform:[STCinnerDataFormAPI]?
 }
 
-struct STCinnerRegion: Decodable {
+struct STCinnerRegionAPI: Decodable {
     let name:String
 }
 
-struct STCinnerDataForm: Identifiable, Decodable {
+struct STCinnerDataFormAPI: Identifiable, Decodable {
     var id = UUID()
     let functype: String
     let parameters: String
@@ -28,4 +28,31 @@ struct STCform:Identifiable {
     var id = UUID()
     let functype:String
     let parameters:String
+    var results:String?
+}
+
+//DetailedForm Structs
+struct STCF_checkBox {
+    let title:String
+    let quantity:Int
+    let tags:[String]
+    let NumAccepted:Int
+}
+
+struct STCF_listField {
+    let title:String
+    let quantity:Int
+    let tags:[String]
+    let NumAccepted:Int
+}
+
+struct STCF_stepper {
+    let title:String
+    let modificators:[String]
+}
+
+struct STCF_container {
+    var checkBox:STCF_checkBox?
+    var listField:STCF_listField?
+    var stepper:STCF_stepper?
 }
