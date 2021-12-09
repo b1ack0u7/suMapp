@@ -8,13 +8,10 @@
 import SwiftUI
 import CoreData
 
-
-
 struct ContentView: View {
     @State private var tabIcons:[String] = ["house.fill","text.book.closed.fill","exclamationmark.triangle.fill","gear"]
     @State private var tabIndex:Int = 0
     @State var showLoggin:Bool
-    let apiCall:String
     
     var body: some View {
         if(!showLoggin) {
@@ -77,17 +74,17 @@ struct ContentView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: 70, alignment: .center)
             }
-            .onAppear {
-                
-            }
             .transition(AnyTransition.opacity.animation(.easeInOut))
         }
 
     }
+    
+
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(showLoggin: true, apiCall: "https://run.mocky.io/v3/d2966d0f-05cb-4e73-a27b-cb610be6156e")
+        ContentView(showLoggin: true)
+            
     }
 }

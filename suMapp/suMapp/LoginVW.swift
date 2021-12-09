@@ -13,22 +13,41 @@ private struct UserData: Decodable {
     var api:String?
 }
 
-struct LoginVW: View {
-    //@Environment(\.managedObjectContext) private var viewContext
+private struct STCdataApi: Decodable {
+    var regions:[STCinnerRegion]?
+    var dataform:[STCinnerDataForm]?
+}
 
+private struct STCinnerRegion: Decodable {
+    let name:String
+}
+
+private struct STCinnerDataForm: Identifiable, Decodable {
+    var id = UUID()
+    let functype: String
+    let parameters: String
+    
+    private enum CodingKeys: String, CodingKey {case functype, parameters}
+}
+
+struct LoginVW: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(entity: Item.entity(), sortDescriptors: [], animation: .default) private var items: FetchedResults<Item>
+    
     enum Field {
         case user
         case pass
     }
     
     @State private var userData:UserData = UserData()
+    @State private var dataForm:STCdataApi = STCdataApi()
     @State private var isLoading:Bool = false
     @State private var inteliBlock:Bool = false
     @State private var showError:Bool = false
     @Binding var showLoggin:Bool
     @FocusState private var focusField: Field?
     
-    private let apiURL:String = "https://run.mocky.io/v3/69861b94-c408-4b6d-b156-2a08d113f2ca"
+    private let apiURL:String = "https://run.mocky.io/v3/f5b0557f-792b-4fe0-aff2-bafd4ecccb82"
     
     var body: some View {
         ZStack {
@@ -104,49 +123,22 @@ struct LoginVW: View {
                 }.frame(width: 300, height: 50, alignment: .center)
                 
                 Button(action: {
-                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                    isLoading = true
-                    showError = false
-                    guard let url = URL(string: apiURL) else {return}
-                    URLSession.shared.dataTask(with: url) {(data, response, _) in
-                            do {
-                                guard let data = data else {return}
-                                let decoded = try JSONDecoder().decode(UserData.self, from: data)
-                                DispatchQueue.main.async {
-                                    isLoading = false
-                                    if(decoded.user == userData.user && decoded.pass == userData.pass) {
-                                        UserDefaults.standard.set(true, forKey: "isLogged")
-                                        UserDefaults.standard.set(decoded.api, forKey: "api")
-                                        UINotificationFeedbackGenerator().notificationOccurred(.success)
-                                        withAnimation(.easeInOut) {
-                                            showLoggin.toggle()
-                                        }
-                                    }
-                                    else {
-                                        UINotificationFeedbackGenerator().notificationOccurred(.error)
-                                        userData.pass = ""
-                                        showError = true
-                                    }
-                                }
-                                
-                            } catch let error as NSError {
-                                print("DBG: API error: ",error.localizedDescription)
-                            }
-                        }.resume()
-                    }, label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 15, style: .continuous)
-                                .fill(.linearGradient(Gradient(colors: [Color(#colorLiteral(red: 0.2190982836, green: 0.2480710534, blue: 0.3889210015, alpha: 1)), Color(#colorLiteral(red: 0.9602280259, green: 0.5539468527, blue: 0.2222737372, alpha: 1))]), startPoint: .leading, endPoint: .trailing))
-                            
-                            HStack {
-                                Text("Ingresar")
-                                    .foregroundColor(.white)
-                                    .bold()
-                                Image(systemName: "play.fill")
-                                    .foregroundColor(.white)
-                            }
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for:nil)
+                    authenticateCredentials()
+                }, label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 15, style: .continuous)
+                            .fill(.linearGradient(Gradient(colors: [Color(#colorLiteral(red: 0.2190982836, green: 0.2480710534, blue: 0.3889210015, alpha: 1)), Color(#colorLiteral(red: 0.9602280259, green: 0.5539468527, blue: 0.2222737372, alpha: 1))]), startPoint: .leading, endPoint: .trailing))
+                        
+                        HStack {
+                            Text("Ingresar")
+                                .foregroundColor(.white)
+                                .bold()
+                            Image(systemName: "play.fill")
+                                .foregroundColor(.white)
                         }
-                    })
+                    }
+                })
                     .disabled(inteliBlock)
                     .frame(width: 120, height: 40, alignment: .center)
                     .offset(x: 0, y: 40)
@@ -165,45 +157,90 @@ struct LoginVW: View {
                         .bold()
                         .offset(x: 0, y: 100)
                 }
-                
             }
             .onSubmit {
                 switch focusField {
                     case .user:
                         focusField = .pass
                     default:
-                        inteliBlock = true
-                        isLoading = true
-                        showError = false
-                        guard let url = URL(string: apiURL) else {return}
-                        URLSession.shared.dataTask(with: url) {(data, response, _) in
-                            do {
-                                guard let data = data else {return}
-                                let decoded = try JSONDecoder().decode(UserData.self, from: data)
-                                DispatchQueue.main.async {
-                                    isLoading = false
-                                    if(decoded.user == userData.user && decoded.pass == userData.pass) {
-                                        UserDefaults.standard.set(true, forKey: "isLogged")
-                                        UserDefaults.standard.set(decoded.api, forKey: "api")
-                                        UINotificationFeedbackGenerator().notificationOccurred(.success)
-                                        withAnimation(.easeInOut) {
-                                            showLoggin.toggle()
-                                        }
-                                    }
-                                    else {
-                                        UINotificationFeedbackGenerator().notificationOccurred(.error)
-                                        userData.pass = ""
-                                        showError = true
-                                    }
-                                }
-                                
-                            } catch let error as NSError {
-                                print("DBG: API error: ",error.localizedDescription)
-                            }
-                        }.resume()
+                        authenticateCredentials()
                 }
             }
             .ignoresSafeArea(.keyboard, edges: .bottom)
+        }
+    }
+    
+    private func authenticateCredentials() {
+        inteliBlock = true
+        isLoading = true
+        showError = false
+        guard let url = URL(string: apiURL) else {return}
+        URLSession.shared.dataTask(with: url) {(data, response, _) in
+            do {
+                guard let data = data else {return}
+                let decoded = try JSONDecoder().decode(UserData.self, from: data)
+                DispatchQueue.main.async {
+                    isLoading = false
+                    if(decoded.user == userData.user && decoded.pass == userData.pass) {
+                        fetchForm()
+                    }
+                    else {
+                        UINotificationFeedbackGenerator().notificationOccurred(.error)
+                        userData.pass = ""
+                        showError = true
+                    }
+                }
+                
+            } catch let error as NSError {
+                print("DBG: API error: ",error.localizedDescription)
+            }
+        }.resume()
+    }
+    
+    private func fetchForm() {
+        guard let url = URL(string: userData.api!) else {return}
+        URLSession.shared.dataTask(with: url) {(data, response, _) in
+            do {
+                guard let data = data else {return}
+                let decoded = try JSONDecoder().decode(STCdataApi.self, from: data)
+                DispatchQueue.main.async {
+                    dataForm = decoded
+                    
+                    UserDefaults.standard.set(true, forKey: "isLogged")
+                    UINotificationFeedbackGenerator().notificationOccurred(.success)
+                    saveData()
+                    withAnimation(.easeInOut) {
+                        showLoggin.toggle()
+                    }
+                }
+            } catch let error as NSError {
+                print("DBG: API error: ",error.localizedDescription)
+            }
+        }.resume()
+    }
+    
+    private func saveData() {
+        DispatchQueue.global(qos: .utility).async {
+            var newRegions:[Regions] = []
+            var newForm:[Form] = []
+            
+            for i in 0..<dataForm.regions!.count {
+                newRegions.append(Regions(name: dataForm.regions![i].name))
+            }
+            for i in 0..<dataForm.dataform!.count {
+                newForm.append(Form(functype: dataForm.dataform![i].functype, parameters: dataForm.dataform![i].parameters))
+            }
+            
+            let newItem = Item(context: viewContext)
+            newItem.regions = newRegions
+            newItem.form = newForm
+            do {
+                try viewContext.save()
+                print("Data saved")
+            } catch {
+                let nsError = error as NSError
+                fatalError("DBGE: Unresolved error \(nsError), \(nsError.userInfo)")
+            }
         }
     }
 }
@@ -211,5 +248,6 @@ struct LoginVW: View {
 struct LoginVW_Previews: PreviewProvider {
     static var previews: some View {
         LoginVW(showLoggin: .constant(true))
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

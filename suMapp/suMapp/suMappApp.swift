@@ -13,7 +13,7 @@ struct suMappApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView(showLoggin: UserDefaults.standard.bool(forKey: "isLogged"), apiCall: UserDefaults.standard.string(forKey: "api")!)
+            ContentView(showLoggin: UserDefaults.standard.bool(forKey: "isLogged"))
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
