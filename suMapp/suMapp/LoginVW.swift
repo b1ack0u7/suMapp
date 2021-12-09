@@ -13,23 +13,6 @@ private struct UserData: Decodable {
     var api:String?
 }
 
-private struct STCdataApi: Decodable {
-    var regions:[STCinnerRegion]?
-    var dataform:[STCinnerDataForm]?
-}
-
-private struct STCinnerRegion: Decodable {
-    let name:String
-}
-
-private struct STCinnerDataForm: Identifiable, Decodable {
-    var id = UUID()
-    let functype: String
-    let parameters: String
-    
-    private enum CodingKeys: String, CodingKey {case functype, parameters}
-}
-
 struct LoginVW: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Item.entity(), sortDescriptors: [], animation: .default) private var items: FetchedResults<Item>
@@ -40,14 +23,14 @@ struct LoginVW: View {
     }
     
     @State private var userData:UserData = UserData()
-    @State private var dataForm:STCdataApi = STCdataApi()
+    //@State private var dataForm:STCdataApi = STCdataApi()
     @State private var isLoading:Bool = false
     @State private var inteliBlock:Bool = false
     @State private var showError:Bool = false
     @Binding var showLoggin:Bool
     @FocusState private var focusField: Field?
     
-    private let apiURL:String = "https://run.mocky.io/v3/f5b0557f-792b-4fe0-aff2-bafd4ecccb82"
+    private let apiURL:String = "https://run.mocky.io/v3/1aae8b05-a093-433d-a9f2-366ca7742d82"
     
     var body: some View {
         ZStack {
@@ -205,11 +188,10 @@ struct LoginVW: View {
                 guard let data = data else {return}
                 let decoded = try JSONDecoder().decode(STCdataApi.self, from: data)
                 DispatchQueue.main.async {
-                    dataForm = decoded
-                    
                     UserDefaults.standard.set(true, forKey: "isLogged")
+                    UserDefaults.standard.set(userData.api, forKey: "api")
                     UINotificationFeedbackGenerator().notificationOccurred(.success)
-                    saveData()
+                    saveData(dataForm: decoded)
                     withAnimation(.easeInOut) {
                         showLoggin.toggle()
                     }
@@ -220,7 +202,7 @@ struct LoginVW: View {
         }.resume()
     }
     
-    private func saveData() {
+    private func saveData(dataForm:STCdataApi) {
         DispatchQueue.global(qos: .utility).async {
             var newRegions:[Regions] = []
             var newForm:[Form] = []
