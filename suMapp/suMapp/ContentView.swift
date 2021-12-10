@@ -11,14 +11,10 @@ import CoreData
 struct ContentView: View {
     @State private var tabIcons:[String] = ["house.fill","text.book.closed.fill","exclamationmark.triangle.fill","gear"]
     @State private var tabIndex:Int = 0
-    @State var showLoggin:Bool
+    @State var isLogged:Bool
     
     var body: some View {
-        if(!showLoggin) {
-            LoginVW(showLoggin: $showLoggin)
-                .transition(AnyTransition.opacity.animation(.easeInOut))
-        }
-        else {
+        if(isLogged) {
             VStack(spacing: 0) {
                 switch tabIndex {
                 case 0:
@@ -28,7 +24,7 @@ struct ContentView: View {
                 case 2:
                     AlertsVW()
                 case 3:
-                    SettingsVW()
+                    SettingsVW(isLogged: $isLogged)
                 default:
                     Text("")
                 }
@@ -74,10 +70,12 @@ struct ContentView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: 70, alignment: .center)
             }
-            .onAppear {
-                
-            }
             .transition(AnyTransition.opacity.animation(.easeInOut))
+            
+        }
+        else {
+            LoginVW(isLogged: $isLogged)
+                .transition(AnyTransition.opacity.animation(.easeInOut))
         }
 
     }
@@ -87,7 +85,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(showLoggin: true)
+        ContentView(isLogged: true)
             
     }
 }

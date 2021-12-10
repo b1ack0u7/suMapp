@@ -26,7 +26,7 @@ struct LoginVW: View {
     @State private var isLoading:Bool = false
     @State private var inteliBlock:Bool = false
     @State private var showError:Bool = false
-    @Binding var showLoggin:Bool
+    @Binding var isLogged:Bool
     @FocusState private var focusField: Field?
     
     private let apiURL:String = "https://run.mocky.io/v3/edecfb65-643d-4a3e-aaef-d8b361bf1acd"
@@ -162,7 +162,6 @@ struct LoginVW: View {
                 guard let data = data else {return}
                 let decoded = try JSONDecoder().decode(UserData.self, from: data)
                 DispatchQueue.main.async {
-                    isLoading = false
                     if(decoded.user == userData.user && decoded.pass == userData.pass) {
                         userData.api = decoded.api
                         fetchForm()
@@ -191,8 +190,9 @@ struct LoginVW: View {
                     UserDefaults.standard.set(userData.api, forKey: "api")
                     UINotificationFeedbackGenerator().notificationOccurred(.success)
                     saveData(dataForm: decoded)
+                    isLoading = false
                     withAnimation(.easeInOut) {
-                        showLoggin.toggle()
+                        isLogged.toggle()
                     }
                 }
             } catch let error as NSError {
@@ -229,7 +229,7 @@ struct LoginVW: View {
 
 struct LoginVW_Previews: PreviewProvider {
     static var previews: some View {
-        LoginVW(showLoggin: .constant(true))
+        LoginVW(isLogged: .constant(true))
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

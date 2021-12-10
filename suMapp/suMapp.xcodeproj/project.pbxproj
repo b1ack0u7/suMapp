@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7700C5A12763AEFE00A9D6B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7700C5A02763AEFE00A9D6B3 /* LaunchScreen.storyboard */; };
 		7703548C276191C000B472DF /* DetailedFormVW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7703548B276191C000B472DF /* DetailedFormVW.swift */; };
 		7703548E2761960000B472DF /* myStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7703548D2761960000B472DF /* myStructs.swift */; };
 		771122A82760667D007F92EC /* LoginVW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771122A72760667D007F92EC /* LoginVW.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7700C5A02763AEFE00A9D6B3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7703548B276191C000B472DF /* DetailedFormVW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedFormVW.swift; sourceTree = "<group>"; };
 		7703548D2761960000B472DF /* myStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myStructs.swift; sourceTree = "<group>"; };
 		771122A72760667D007F92EC /* LoginVW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVW.swift; sourceTree = "<group>"; };
@@ -42,7 +44,7 @@
 		7728466D2762FAE6004C5EAC /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		7728466F2762FB82004C5EAC /* CameraMD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraMD.swift; sourceTree = "<group>"; };
 		7732037A276295A300987489 /* CheckBoxMD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxMD.swift; sourceTree = "<group>"; };
-		77A11E19275EEF750037AB78 /* suMapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = suMapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		77A11E19275EEF750037AB78 /* SuMapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuMapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77A11E1C275EEF750037AB78 /* suMappApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = suMappApp.swift; sourceTree = "<group>"; };
 		77A11E1E275EEF750037AB78 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		77A11E20275EEF780037AB78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -100,7 +102,7 @@
 		77A11E1A275EEF750037AB78 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				77A11E19275EEF750037AB78 /* suMapp.app */,
+				77A11E19275EEF750037AB78 /* SuMapp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -117,6 +119,7 @@
 				77A11E25275EEF780037AB78 /* Persistence.swift */,
 				77A11E27275EEF780037AB78 /* suMapp.xcdatamodeld */,
 				77A11E22275EEF780037AB78 /* Preview Content */,
+				7700C5A02763AEFE00A9D6B3 /* LaunchScreen.storyboard */,
 			);
 			path = suMapp;
 			sourceTree = "<group>";
@@ -158,7 +161,7 @@
 			packageProductDependencies = (
 			);
 			productName = suMapp;
-			productReference = 77A11E19275EEF750037AB78 /* suMapp.app */;
+			productReference = 77A11E19275EEF750037AB78 /* SuMapp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -203,6 +206,7 @@
 			files = (
 				77A11E24275EEF780037AB78 /* Preview Assets.xcassets in Resources */,
 				77EE380427624E78004A683E /* JSON in Resources */,
+				7700C5A12763AEFE00A9D6B3 /* LaunchScreen.storyboard in Resources */,
 				77A11E21275EEF780037AB78 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,6 +372,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortraitUpsideDown;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -377,7 +382,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = AetherSTD.suMapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SuMapp;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -399,6 +404,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortraitUpsideDown;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -408,7 +414,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = AetherSTD.suMapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SuMapp;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
