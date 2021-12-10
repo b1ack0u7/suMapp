@@ -16,6 +16,8 @@
 		771122B127606A7B007F92EC /* SettingsVW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771122B027606A7B007F92EC /* SettingsVW.swift */; };
 		771C653C275FA70B004486F5 /* SQL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771C653B275FA70B004486F5 /* SQL.swift */; };
 		7728466C2762E9B3004C5EAC /* ListFieldMD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7728466B2762E9B3004C5EAC /* ListFieldMD.swift */; };
+		7728466E2762FAE6004C5EAC /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7728466D2762FAE6004C5EAC /* Camera.swift */; };
+		772846702762FB82004C5EAC /* CameraMD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7728466F2762FB82004C5EAC /* CameraMD.swift */; };
 		7732037B276295A300987489 /* CheckBoxMD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7732037A276295A300987489 /* CheckBoxMD.swift */; };
 		77A11E1D275EEF750037AB78 /* suMappApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A11E1C275EEF750037AB78 /* suMappApp.swift */; };
 		77A11E1F275EEF750037AB78 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A11E1E275EEF750037AB78 /* ContentView.swift */; };
@@ -37,6 +39,8 @@
 		771122B027606A7B007F92EC /* SettingsVW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVW.swift; sourceTree = "<group>"; };
 		771C653B275FA70B004486F5 /* SQL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQL.swift; sourceTree = "<group>"; };
 		7728466B2762E9B3004C5EAC /* ListFieldMD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFieldMD.swift; sourceTree = "<group>"; };
+		7728466D2762FAE6004C5EAC /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		7728466F2762FB82004C5EAC /* CameraMD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraMD.swift; sourceTree = "<group>"; };
 		7732037A276295A300987489 /* CheckBoxMD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxMD.swift; sourceTree = "<group>"; };
 		77A11E19275EEF750037AB78 /* suMapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = suMapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77A11E1C275EEF750037AB78 /* suMappApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = suMappApp.swift; sourceTree = "<group>"; };
@@ -79,6 +83,8 @@
 				77EE380327624E78004A683E /* JSON */,
 				7732037A276295A300987489 /* CheckBoxMD.swift */,
 				7728466B2762E9B3004C5EAC /* ListFieldMD.swift */,
+				7728466F2762FB82004C5EAC /* CameraMD.swift */,
+				7728466D2762FAE6004C5EAC /* Camera.swift */,
 			);
 			path = "Modules Form";
 			sourceTree = "<group>";
@@ -105,8 +111,8 @@
 				77A11E1C275EEF750037AB78 /* suMappApp.swift */,
 				77E786CF275F04D50007651D /* Classes & Structs */,
 				77A11E1E275EEF750037AB78 /* ContentView.swift */,
-				771122AF27606A4D007F92EC /* Menu */,
 				771122A72760667D007F92EC /* LoginVW.swift */,
+				771122AF27606A4D007F92EC /* Menu */,
 				77A11E20275EEF780037AB78 /* Assets.xcassets */,
 				77A11E25275EEF780037AB78 /* Persistence.swift */,
 				77A11E27275EEF780037AB78 /* suMapp.xcdatamodeld */,
@@ -208,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7728466E2762FAE6004C5EAC /* Camera.swift in Sources */,
 				771C653C275FA70B004486F5 /* SQL.swift in Sources */,
 				7703548E2761960000B472DF /* myStructs.swift in Sources */,
 				771122B127606A7B007F92EC /* SettingsVW.swift in Sources */,
@@ -222,6 +229,7 @@
 				771122AA276069EE007F92EC /* HomeVW.swift in Sources */,
 				771122A82760667D007F92EC /* LoginVW.swift in Sources */,
 				77A11E1D275EEF750037AB78 /* suMappApp.swift in Sources */,
+				772846702762FB82004C5EAC /* CameraMD.swift in Sources */,
 				771122AE27606A3E007F92EC /* AlertsVW.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,6 +364,7 @@
 				DEVELOPMENT_TEAM = KUA74EN55S;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -386,6 +395,7 @@
 				DEVELOPMENT_TEAM = KUA74EN55S;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

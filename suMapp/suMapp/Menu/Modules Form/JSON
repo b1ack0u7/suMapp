@@ -1,4 +1,4 @@
-{"user":"axelmontes@hotmail.com", "pass":"123456", "api":"https://run.mocky.io/v3/6151d88d-b7a2-4183-bf59-15cc5033bbef"}
+{"user":"axelmontes@hotmail.com", "pass":"123456", "api":"https://run.mocky.io/v3/3bd07a60-b0e8-4543-8099-d6e6cddc7694"}
 
 {
    "regions":[
@@ -31,7 +31,7 @@
       },
       {
          "functype":"photo",
-         "parameters":""
+         "parameters":"Evidencia de Sal Inicial"
       },
       {
          "functype":"listField",
@@ -43,7 +43,7 @@
       },
       {
          "functype":"photo",
-         "parameters":""
+         "parameters":"Evidencia de Sal Final"
       },
       {
          "functype":"stepper",

@@ -49,7 +49,7 @@ struct DetailedFormVW: View {
                             case .checkBox:
                                 CheckBoxMD(dataForm: $dataForm[idx], parameters: dataContainer[idx].checkBox!)
                                     .padding(.bottom, 20)
-                                //Text("CheckBox")
+                                
                             case .textField:
                                 Text("TextField")
                                     .padding(.bottom, 20)
@@ -59,7 +59,7 @@ struct DetailedFormVW: View {
                                     .padding(.bottom, 20)
                                 
                             case .photo:
-                                Text("Photo")
+                                CameraMD(dataForm: $dataForm[idx])
                                     .padding(.bottom, 20)
                                 
                             case.stepper:
@@ -71,6 +71,7 @@ struct DetailedFormVW: View {
                             }
                         }
                     }
+                    .frame(maxWidth: .infinity)
                 }
                 .transition(AnyTransition.opacity.animation(.easeInOut))
             }
@@ -97,7 +98,7 @@ struct DetailedFormVW: View {
                     print("DBGN: list")
                 
                 case .photo:
-                    //No tiene parametros
+                    //Titulo
                     dataContainer.append(STCF_container())
                     print("DBGN: photo")
                 

@@ -34,7 +34,11 @@ struct ListFieldMD: View {
     @Binding var dataForm:STCform
     let parameters:STCF_listField
     
+    //Selected only one
     @State private var selectedItem:String = ""
+    @State private var listFetch:[String] = [""]
+    
+    //Selected more than one
     @State private var selectionsItem:[String] = []
     
     var body: some View {
@@ -50,19 +54,30 @@ struct ListFieldMD: View {
                     Spacer()
                     
                     Picker("Seleccione su opción", selection: $selectedItem) {
-                        ForEach(parameters.tags.indices, id: \.self) { idx in
-                            Text(parameters.tags[idx])
+                        ForEach(listFetch.indices, id: \.self) { idx in
+                            Text(listFetch[idx])
                         }
                     }
                     .pickerStyle(.wheel)
-                    .frame(width: 250, height: 100)
+                    .frame(width: 250, height: 190)
                     .clipped()
                     
                     Spacer()
                 }
             }
             .cornerRadius(20)
-            .frame(width: 350, height: 160, alignment: .center)
+            .frame(width: 350, height: 250, alignment: .center)
+            .onAppear {
+                if(parameters.tags[0] == "#Sequence") {
+                    listFetch = []
+                    for i in 0...parameters.quantity {
+                        listFetch.append(String(i))
+                    }
+                }
+                else {
+                    listFetch = parameters.tags
+                }
+            }
         }
         else {
             ZStack {
@@ -93,11 +108,11 @@ struct ListFieldMD: View {
                     Spacer()
                 }
             }
+            .cornerRadius(20)
+            .frame(width: 350, height: 250, alignment: .center)
             .onAppear {
                 UITableView.appearance().backgroundColor = UIColor(Color("ITF Menu"))
             }
-            .cornerRadius(20)
-            .frame(width: 350, height: 250, alignment: .center)
         }
         
     }
