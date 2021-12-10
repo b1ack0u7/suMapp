@@ -25,7 +25,7 @@ struct DetailedFormVW: View {
     
     var body: some View {
         ZStack {
-            Color("Color BG")
+            Color("ITF BG")
                 .ignoresSafeArea()
             
             if(isLoading) {
@@ -43,23 +43,28 @@ struct DetailedFormVW: View {
             }
             else {
                 VStack {
-                    ScrollView {
+                    ScrollView(showsIndicators: false) {
                         ForEach(dataForm.indices, id:\.self) { idx in
                             switch (Keys(rawValue: dataForm[idx].functype)) {
                             case .checkBox:
                                 CheckBoxMD(dataForm: $dataForm[idx], parameters: dataContainer[idx].checkBox!)
+                                    .padding(.bottom, 20)
                                 //Text("CheckBox")
                             case .textField:
                                 Text("TextField")
+                                    .padding(.bottom, 20)
                                 
                             case .listField:
-                                listView()
+                                ListFieldMD(dataForm: $dataForm[idx], parameters: dataContainer[idx].listField!)
+                                    .padding(.bottom, 20)
                                 
                             case .photo:
                                 Text("Photo")
+                                    .padding(.bottom, 20)
                                 
                             case.stepper:
                                 Text("Stepper")
+                                    .padding(.bottom, 20)
                                 
                             case .none:
                                 Text("None")
@@ -112,15 +117,7 @@ struct DetailedFormVW: View {
             }
         }
     }
-    
 
-    
-    @ViewBuilder
-    private func listView() -> some View {
-        VStack {
-            Text("ListView")
-        }
-    }
 }
 
 struct DetailedFormVW_Previews: PreviewProvider {

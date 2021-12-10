@@ -34,9 +34,9 @@ struct ContentView: View {
                 }
                 
                 ZStack {
-                    Color("Color BG")
+                    Color("ITF BG")
                     Rectangle()
-                        .fill(Color("Color menu"))
+                        .fill(Color("ITF Menu"))
                         .cornerRadius(25)
                         .shadow(radius: 6)
                         .edgesIgnoringSafeArea(.bottom)

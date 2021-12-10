@@ -16,7 +16,7 @@ struct HomeVW: View {
     
     var body: some View {
         ZStack {
-            Color("Color BG")
+            Color("ITF BG")
                 .ignoresSafeArea()
             
             Button(action: {
