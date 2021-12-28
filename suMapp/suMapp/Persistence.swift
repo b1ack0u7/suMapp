@@ -2,7 +2,7 @@
 //  Persistence.swift
 //  suMapp
 //
-//  Created by Axel Montes de Oca on 06/12/21.
+//  Created by Axel Montes de Oca on 28/12/21.
 //
 
 import CoreData
@@ -13,8 +13,10 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        let newItem = Item(context: viewContext)
-        newItem.regions = [Regions(name: "China"), Regions(name: "Japon"), Regions(name: "America"), Regions(name: "Oceania")]
+        for _ in 0..<10 {
+            let newItem = Item(context: viewContext)
+            newItem.timestamp = Date()
+        }
         do {
             try viewContext.save()
         } catch {
