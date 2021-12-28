@@ -25,7 +25,39 @@ extension View {
     }
 }
 
-public class Regions: NSObject, NSCoding {
+/*
+public class Sections: NSObject, NSSecureCoding {
+    public static var supportsSecureCoding: Bool = true
+    
+    let name:String
+    let forms:[STCinnerDataFormAPI]
+    
+    enum Keys:String {
+        case name = "name"
+        case forms = "forms"
+    }
+    
+    init(name:String, forms:[STCinnerDataFormAPI]) {
+        self.name = name
+        self.forms = forms
+    }
+    
+    public required convenience init?(coder: NSCoder) {
+        let mName = coder.decodeObject(of: NSString.self, forKey: Keys.name.rawValue)! as String
+        let mForms = coder.decodeObject(of: NSArray.self, forKey: Keys.forms.rawValue)! as! [STCinnerDataFormAPI]
+        
+        self.init(name: mName, forms: mForms)
+    }
+    
+    public func encode(with coder: NSCoder) {
+        coder.encode(name, forKey: Keys.name.rawValue)
+        coder.encode(forms, forKey: Keys.forms.rawValue)
+    }
+}*/
+
+public class Regions: NSObject, NSSecureCoding {
+    public static var supportsSecureCoding: Bool = true
+    
     let name:String
     
     enum Keys:String {
@@ -36,42 +68,28 @@ public class Regions: NSObject, NSCoding {
         self.name = name
     }
     
+    public required convenience init?(coder: NSCoder) {
+        let mName = coder.decodeObject(of: NSString.self, forKey: Keys.name.rawValue)! as String
+        
+        self.init(name: mName)
+    }
+    
     public func encode(with coder: NSCoder) {
         coder.encode(name, forKey: Keys.name.rawValue)
     }
-    
-    public required convenience init?(coder: NSCoder) {
-        let Mname = coder.decodeObject(forKey: Keys.name.rawValue) as! String
-        
-        self.init(name: Mname)
-    }
-}
-
-public class Form: NSObject, NSCoding {
-    let functype:String
-    let parameters:String
-    
-    enum Keys:String {
-        case functype = "functype"
-        case parameters = "parameters"
-    }
-    
-    init(functype:String, parameters:String) {
-        self.functype = functype
-        self.parameters = parameters
-    }
-    
-    public func encode(with coder: NSCoder) {
-        coder.encode(functype, forKey: Keys.functype.rawValue)
-        coder.encode(parameters, forKey: Keys.parameters.rawValue)
-    }
-    
-    public required convenience init?(coder: NSCoder) {
-        let Mfunctype = coder.decodeObject(forKey: Keys.functype.rawValue) as! String
-        let Mparameters = coder.decodeObject(forKey: Keys.parameters.rawValue) as! String
-        
-        self.init(functype: Mfunctype, parameters: Mparameters)
-    }
 }
 
 
+class DBAttributeTransformer: NSSecureUnarchiveFromDataTransformer {
+    override static var allowedTopLevelClasses: [AnyClass] {
+        [Regions.self]
+    }
+    
+    static func register() {
+        let className = String(describing: DBAttributeTransformer.self)
+        let name = NSValueTransformerName(className)
+        let transformer = DBAttributeTransformer()
+        
+        ValueTransformer.setValueTransformer(transformer, forName: name)
+    }
+}

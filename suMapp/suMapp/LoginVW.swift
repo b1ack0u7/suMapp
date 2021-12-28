@@ -8,28 +8,29 @@
 import SwiftUI
 
 private struct UserData: Decodable {
-    var user:String = ""
-    var pass:String = ""
+    var user:String = "axel"
+    var pass:String = "123"
     var api:String?
 }
 
 struct LoginVW: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Item.entity(), sortDescriptors: [], animation: .default) private var items: FetchedResults<Item>
+    @Binding var isLogged:Bool
     
     private enum Field {
         case user
         case pass
     }
-    
+
     @State private var userData:UserData = UserData()
     @State private var isLoading:Bool = false
     @State private var inteliBlock:Bool = false
     @State private var showError:Bool = false
-    @Binding var isLogged:Bool
+    
     @FocusState private var focusField: Field?
     
-    private let apiURL:String = "https://run.mocky.io/v3/edecfb65-643d-4a3e-aaef-d8b361bf1acd"
+    private let apiURL:String = "https://run.mocky.io/v3/6eb82708-0be4-4401-9870-b5b6ae531aed"
     
     var body: some View {
         ZStack {
@@ -106,7 +107,8 @@ struct LoginVW: View {
                 
                 Button(action: {
                     UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for:nil)
-                    authenticateCredentials()
+                    //authenticateCredentials()
+                    test()
                 }, label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 15, style: .continuous)
@@ -186,14 +188,7 @@ struct LoginVW: View {
                 guard let data = data else {return}
                 let decoded = try JSONDecoder().decode(STCdataApi.self, from: data)
                 DispatchQueue.main.async {
-                    UserDefaults.standard.set(true, forKey: "isLogged")
-                    UserDefaults.standard.set(userData.api, forKey: "api")
-                    UINotificationFeedbackGenerator().notificationOccurred(.success)
-                    saveData(dataForm: decoded)
-                    isLoading = false
-                    withAnimation(.easeInOut) {
-                        isLogged.toggle()
-                    }
+                    //saveData(dataForm: decoded)
                 }
             } catch let error as NSError {
                 print("DBG: API error: ",error.localizedDescription)
@@ -201,30 +196,56 @@ struct LoginVW: View {
         }.resume()
     }
     
+    private func test() {
+        let newItem = Item(context: viewContext)
+        newItem.regions = Regions(name: "hey")
+        
+        do {
+            try viewContext.save()
+            print("DBG: se guardo")
+        } catch {
+            let nsError = error as NSError
+            print("DBGE: Unresolved error \(nsError), \(nsError.userInfo)")
+        }
+    }
+    /*
     private func saveData(dataForm:STCdataApi) {
         DispatchQueue.global(qos: .utility).async {
             var newRegions:[Regions] = []
-            var newForm:[Form] = []
+            //var newSections:[Sections] = []
             
             for i in 0..<dataForm.regions!.count {
                 newRegions.append(Regions(name: dataForm.regions![i].name))
+                //print("DBG: \(newRegions[i].name)")
             }
-            for i in 0..<dataForm.dataform!.count {
-                newForm.append(Form(functype: dataForm.dataform![i].functype, parameters: dataForm.dataform![i].parameters))
-            }
+            /*
+            for i in 0..<dataForm.sections!.count {
+                newSections.append(Sections(name: dataForm.sections![i].name, forms: dataForm.sections![i].dataform))
+                print("DBG: \(newSections[i].name) | \(newSections[i].forms[0].functype)")
+            }*/
             
             let newItem = Item(context: viewContext)
             newItem.regions = newRegions
-            newItem.form = newForm
+           // newItem.sections = newSections
             do {
                 try viewContext.save()
-                print("Data saved")
+                print("DBG: Data saved")
+                
+                UserDefaults.standard.set(true, forKey: "isLogged")
+                UserDefaults.standard.set(userData.api, forKey: "api")
+                UINotificationFeedbackGenerator().notificationOccurred(.success)
+                
+                isLoading = false
+                withAnimation(.easeInOut) {
+                    isLogged.toggle()
+                }
             } catch {
                 let nsError = error as NSError
-                fatalError("DBGE: Unresolved error \(nsError), \(nsError.userInfo)")
+                print("DBGE: Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
     }
+     */
 }
 
 struct LoginVW_Previews: PreviewProvider {

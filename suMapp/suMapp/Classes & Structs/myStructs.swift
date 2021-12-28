@@ -9,11 +9,16 @@ import Foundation
 
 struct STCdataApi: Decodable {
     var regions:[STCinnerRegionAPI]?
-    var dataform:[STCinnerDataFormAPI]?
+    var sections:[STCinnerSectionAPI]?
 }
 
 struct STCinnerRegionAPI: Decodable {
     let name:String
+}
+
+struct STCinnerSectionAPI: Decodable {
+    let name:String
+    let dataform:[STCinnerDataFormAPI]
 }
 
 struct STCinnerDataFormAPI: Identifiable, Decodable {

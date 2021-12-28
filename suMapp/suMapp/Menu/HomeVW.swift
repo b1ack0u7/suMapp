@@ -78,17 +78,19 @@ struct HomeVW: View {
     private func updateData(dataForm:STCdataApi) {
         DispatchQueue.global(qos: .utility).async {
             var newRegions:[Regions] = []
-            var newForm:[Form] = []
+            //var newSections:[Sections] = []
             
             for i in 0..<dataForm.regions!.count {
                 newRegions.append(Regions(name: dataForm.regions![i].name))
             }
-            for i in 0..<dataForm.dataform!.count {
-                newForm.append(Form(functype: dataForm.dataform![i].functype, parameters: dataForm.dataform![i].parameters))
+            /*
+            for i in 0..<dataForm.sections!.count {
+                newSections.append(Sections(name: dataForm.sections![i].name, forms: dataForm.sections![i].dataform))
             }
-            
+            */
             items[0].regions = newRegions
-            items[0].form = newForm
+            //items[0].sections = newSections
+            
             do {
                 try viewContext.save()
                 print("Data updated")
