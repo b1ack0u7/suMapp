@@ -13,6 +13,14 @@
 		77EA9058277B862300E41C0A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77EA9057277B862300E41C0A /* Preview Assets.xcassets */; };
 		77EA905A277B862300E41C0A /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EA9059277B862300E41C0A /* Persistence.swift */; };
 		77EA905D277B862300E41C0A /* suMapp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77EA905B277B862300E41C0A /* suMapp.xcdatamodeld */; };
+		77EA9065277B885300E41C0A /* HomeVW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EA9064277B885300E41C0A /* HomeVW.swift */; };
+		77EA9067277B886000E41C0A /* FormsVW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EA9066277B886000E41C0A /* FormsVW.swift */; };
+		77EA9069277B887100E41C0A /* AlertsVW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EA9068277B887100E41C0A /* AlertsVW.swift */; };
+		77EA906B277B888400E41C0A /* SettingsVW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EA906A277B888400E41C0A /* SettingsVW.swift */; };
+		77EA906D277B88C600E41C0A /* LoginVW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EA906C277B88C600E41C0A /* LoginVW.swift */; };
+		77EA9070277B898E00E41C0A /* myClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EA906F277B898E00E41C0A /* myClasses.swift */; };
+		77EA9072277B98BE00E41C0A /* myStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EA9071277B98BE00E41C0A /* myStructs.swift */; };
+		77EA9074277BA9B700E41C0A /* JSON in Resources */ = {isa = PBXBuildFile; fileRef = 77EA9073277BA9B700E41C0A /* JSON */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +31,14 @@
 		77EA9057277B862300E41C0A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		77EA9059277B862300E41C0A /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		77EA905C277B862300E41C0A /* suMapp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = suMapp.xcdatamodel; sourceTree = "<group>"; };
+		77EA9064277B885300E41C0A /* HomeVW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVW.swift; sourceTree = "<group>"; };
+		77EA9066277B886000E41C0A /* FormsVW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormsVW.swift; sourceTree = "<group>"; };
+		77EA9068277B887100E41C0A /* AlertsVW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsVW.swift; sourceTree = "<group>"; };
+		77EA906A277B888400E41C0A /* SettingsVW.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVW.swift; sourceTree = "<group>"; };
+		77EA906C277B88C600E41C0A /* LoginVW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVW.swift; sourceTree = "<group>"; };
+		77EA906F277B898E00E41C0A /* myClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myClasses.swift; sourceTree = "<group>"; };
+		77EA9071277B98BE00E41C0A /* myStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myStructs.swift; sourceTree = "<group>"; };
+		77EA9073277BA9B700E41C0A /* JSON */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSON; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +72,10 @@
 			isa = PBXGroup;
 			children = (
 				77EA9050277B862100E41C0A /* suMappApp.swift */,
+				77EA906E277B897600E41C0A /* Classes & Structs */,
 				77EA9052277B862100E41C0A /* ContentView.swift */,
+				77EA906C277B88C600E41C0A /* LoginVW.swift */,
+				77EA9063277B883F00E41C0A /* Menu */,
 				77EA9054277B862300E41C0A /* Assets.xcassets */,
 				77EA9059277B862300E41C0A /* Persistence.swift */,
 				77EA905B277B862300E41C0A /* suMapp.xcdatamodeld */,
@@ -71,6 +90,27 @@
 				77EA9057277B862300E41C0A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		77EA9063277B883F00E41C0A /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				77EA9073277BA9B700E41C0A /* JSON */,
+				77EA9064277B885300E41C0A /* HomeVW.swift */,
+				77EA9066277B886000E41C0A /* FormsVW.swift */,
+				77EA9068277B887100E41C0A /* AlertsVW.swift */,
+				77EA906A277B888400E41C0A /* SettingsVW.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		77EA906E277B897600E41C0A /* Classes & Structs */ = {
+			isa = PBXGroup;
+			children = (
+				77EA906F277B898E00E41C0A /* myClasses.swift */,
+				77EA9071277B98BE00E41C0A /* myStructs.swift */,
+			);
+			path = "Classes & Structs";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77EA9058277B862300E41C0A /* Preview Assets.xcassets in Resources */,
+				77EA9074277BA9B700E41C0A /* JSON in Resources */,
 				77EA9055277B862300E41C0A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,8 +184,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77EA9069277B887100E41C0A /* AlertsVW.swift in Sources */,
+				77EA906B277B888400E41C0A /* SettingsVW.swift in Sources */,
+				77EA9070277B898E00E41C0A /* myClasses.swift in Sources */,
 				77EA905A277B862300E41C0A /* Persistence.swift in Sources */,
+				77EA9065277B885300E41C0A /* HomeVW.swift in Sources */,
+				77EA9067277B886000E41C0A /* FormsVW.swift in Sources */,
+				77EA906D277B88C600E41C0A /* LoginVW.swift in Sources */,
 				77EA905D277B862300E41C0A /* suMapp.xcdatamodeld in Sources */,
+				77EA9072277B98BE00E41C0A /* myStructs.swift in Sources */,
 				77EA9053277B862100E41C0A /* ContentView.swift in Sources */,
 				77EA9051277B862100E41C0A /* suMappApp.swift in Sources */,
 			);
@@ -294,7 +342,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -323,7 +371,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
