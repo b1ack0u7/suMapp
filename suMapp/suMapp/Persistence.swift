@@ -13,12 +13,10 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        /*
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-        }
-        */
+        let newItem = Item(context: viewContext)
+        newItem.regions = Regions(region: ["Region1","Region2","Region3"])
+        newItem.sections = Sections(sections: [mySection(name: "Sec1", form: [myForm(functype: "Type1", parameters: "param")])])
+        
         do {
             try viewContext.save()
         } catch {

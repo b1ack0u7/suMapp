@@ -8,56 +8,59 @@
 import SwiftUI
 
 struct FormsVW: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(sortDescriptors: [],animation: .default) private var items: FetchedResults<Item>
+    init() {
+        UITableView.appearance().backgroundColor = UIColor(Color("ITF BG"))
+        
+        //Resources: NavigationView Style
+        //https://www.bigmountainstudio.com/community/public/posts/80041-how-do-i-customize-the-navigationview-in-swiftui
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.backgroundColor = UIColor(Color("ITF BG"))
+        UINavigationBar.appearance().standardAppearance = appearance
+    }
+    @EnvironmentObject var dataTrans: CLSDataTrans
+    
+    @State private var inteliBlock:Bool = true
+    @State private var dataForm:[STCform] = []
     
     var body: some View {
-        VStack {
-            Button(action: {
-                //allData()
-            }, label: {
-                Text("Show Data")
-            }).padding()
-            
-            Button(action: {
-                addItem()
-            }, label: {
-                Text("Add Data")
-            }).padding()
-            
-            if(items.count > 0) {
-                List {
-                    ForEach((items[0].sections?.sections.indices)!, id: \.self) { idx in
-                        Text("\((items[0].sections?.sections[idx].name)!)")
-                    }
-                    
+        NavigationView {
+            List {
+                ForEach(dataTrans.regions.indices, id:\.self) { idx in
+                    NavigationLink(dataTrans.regions[idx], destination: subView())
+                        .listRowBackground(Color("ITF Menu"))
+                        //.disabled(inteliBlock)
                 }
             }
-            
+            .navigationTitle("Regiones")
+        }
+        .onAppear {
+            /*
+            for i in 0..<items[0].form!.count {
+                dataForm.append(STCform(functype: items[0].form![i].functype, parameters: items[0].form![i].parameters))
+            }
+            inteliBlock = false
+             */
         }
     }
-     
     
-    private func addItem() {
-        let newItem = Item(context: viewContext)
-        newItem.regions = Regions(region: ["Hey","que tal"])
-        newItem.sections = Sections(sections: [mySection(name: "Comprar", form: [myForm(functype: "Box", parameters: "pAram")])])
-        
-        do {
-            try viewContext.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nsError = error as NSError
-            print("Unresolved error \(nsError), \(nsError.userInfo)")
+    @ViewBuilder
+    private func subView() -> some View {
+        List {
+            ForEach(dataTrans.sections.indices, id:\.self) { idx in
+                NavigationLink(dataTrans.sections[idx], destination: DetailedFormVW(region: dataTrans.sections[idx], dataForm: dataTrans.dataForm[idx]))
+                    .listRowBackground(Color("ITF Menu"))
+            }
         }
     }
+    
 }
 
 struct FormsVW_Previews: PreviewProvider {
     static var previews: some View {
         FormsVW()
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environmentObject(CLSDataTrans())
+            //.environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            //.colorScheme(.dark)
     }
 }

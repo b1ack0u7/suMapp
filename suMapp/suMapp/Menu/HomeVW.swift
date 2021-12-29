@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeVW: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Item.entity(), sortDescriptors: [], animation: .default) private var items: FetchedResults<Item>
+    @EnvironmentObject var dataTrans: CLSDataTrans
     
     @State private var currentDate:String = ""
     @State private var currentTime:String = ""
@@ -99,9 +100,39 @@ struct HomeVW: View {
             do {
                 try viewContext.save()
                 print("Data updated")
+                setTransferableData()
             } catch {
                 let nsError = error as NSError
                 fatalError("DBGE: Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
+    }
+    
+    private func setTransferableData() {
+        DispatchQueue.global(qos: .userInitiated).async {
+            var tmpRegions:[String] = []
+            for i in 0..<items[0].regions!.region.count {
+                tmpRegions.append(items[0].regions!.region[i])
+            }
+            DispatchQueue.main.async {
+                dataTrans.regions = tmpRegions
+            }
+        }
+        
+        DispatchQueue.global(qos: .background).async {
+            var tmpSections:[String] = []
+            var tmpDataFormAUX:[STCform] = []
+            var tmpDataForm:[[STCform]] = []
+            for i in 0..<(items[0].sections?.sections.count)! {
+                tmpSections.append((items[0].sections?.sections[i].name)!)
+                for j in 0..<(items[0].sections?.sections[i].form.count)! {
+                    tmpDataFormAUX.append(STCform(functype: items[0].sections!.sections[i].form[j].functype, parameters: items[0].sections!.sections[i].form[j].parameters))
+                }
+                tmpDataForm.append(tmpDataFormAUX)
+            }
+            DispatchQueue.main.async {
+                dataTrans.sections = tmpSections
+                dataTrans.dataForm = tmpDataForm
             }
         }
     }
@@ -127,6 +158,7 @@ struct HomeVW: View {
 struct HomeVW_Previews: PreviewProvider {
     static var previews: some View {
         HomeVW()
+            .environmentObject(CLSDataTrans())
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .preferredColorScheme(.dark)
     }

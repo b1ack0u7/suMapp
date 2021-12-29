@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7781D144277BFE10006D57F5 /* CheckBoxMD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7781D143277BFE10006D57F5 /* CheckBoxMD.swift */; };
+		7781D146277BFE1F006D57F5 /* ListFieldMD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7781D145277BFE1F006D57F5 /* ListFieldMD.swift */; };
+		7781D148277BFE2E006D57F5 /* CameraMD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7781D147277BFE2E006D57F5 /* CameraMD.swift */; };
+		7781D14A277BFE38006D57F5 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7781D149277BFE38006D57F5 /* Camera.swift */; };
+		7781D14C277BFE51006D57F5 /* JSON in Resources */ = {isa = PBXBuildFile; fileRef = 7781D14B277BFE51006D57F5 /* JSON */; };
 		77EA9051277B862100E41C0A /* suMappApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EA9050277B862100E41C0A /* suMappApp.swift */; };
 		77EA9053277B862100E41C0A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EA9052277B862100E41C0A /* ContentView.swift */; };
 		77EA9055277B862300E41C0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77EA9054277B862300E41C0A /* Assets.xcassets */; };
@@ -20,10 +25,15 @@
 		77EA906D277B88C600E41C0A /* LoginVW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EA906C277B88C600E41C0A /* LoginVW.swift */; };
 		77EA9070277B898E00E41C0A /* myClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EA906F277B898E00E41C0A /* myClasses.swift */; };
 		77EA9072277B98BE00E41C0A /* myStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EA9071277B98BE00E41C0A /* myStructs.swift */; };
-		77EA9074277BA9B700E41C0A /* JSON in Resources */ = {isa = PBXBuildFile; fileRef = 77EA9073277BA9B700E41C0A /* JSON */; };
+		77EA9076277BAFAA00E41C0A /* DetailedFormVW.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EA9075277BAFAA00E41C0A /* DetailedFormVW.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7781D143277BFE10006D57F5 /* CheckBoxMD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxMD.swift; sourceTree = "<group>"; };
+		7781D145277BFE1F006D57F5 /* ListFieldMD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFieldMD.swift; sourceTree = "<group>"; };
+		7781D147277BFE2E006D57F5 /* CameraMD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraMD.swift; sourceTree = "<group>"; };
+		7781D149277BFE38006D57F5 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		7781D14B277BFE51006D57F5 /* JSON */ = {isa = PBXFileReference; lastKnownFileType = text; path = JSON; sourceTree = "<group>"; };
 		77EA904D277B862100E41C0A /* suMapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = suMapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77EA9050277B862100E41C0A /* suMappApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = suMappApp.swift; sourceTree = "<group>"; };
 		77EA9052277B862100E41C0A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -38,7 +48,7 @@
 		77EA906C277B88C600E41C0A /* LoginVW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVW.swift; sourceTree = "<group>"; };
 		77EA906F277B898E00E41C0A /* myClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myClasses.swift; sourceTree = "<group>"; };
 		77EA9071277B98BE00E41C0A /* myStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myStructs.swift; sourceTree = "<group>"; };
-		77EA9073277BA9B700E41C0A /* JSON */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = JSON; sourceTree = "<group>"; };
+		77EA9075277BAFAA00E41C0A /* DetailedFormVW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedFormVW.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +62,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7781D142277BFDE6006D57F5 /* Modules Form */ = {
+			isa = PBXGroup;
+			children = (
+				7781D14B277BFE51006D57F5 /* JSON */,
+				7781D143277BFE10006D57F5 /* CheckBoxMD.swift */,
+				7781D145277BFE1F006D57F5 /* ListFieldMD.swift */,
+				7781D147277BFE2E006D57F5 /* CameraMD.swift */,
+				7781D149277BFE38006D57F5 /* Camera.swift */,
+			);
+			path = "Modules Form";
+			sourceTree = "<group>";
+		};
 		77EA9044277B862100E41C0A = {
 			isa = PBXGroup;
 			children = (
@@ -95,9 +117,10 @@
 		77EA9063277B883F00E41C0A /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				77EA9073277BA9B700E41C0A /* JSON */,
 				77EA9064277B885300E41C0A /* HomeVW.swift */,
 				77EA9066277B886000E41C0A /* FormsVW.swift */,
+				77EA9075277BAFAA00E41C0A /* DetailedFormVW.swift */,
+				7781D142277BFDE6006D57F5 /* Modules Form */,
 				77EA9068277B887100E41C0A /* AlertsVW.swift */,
 				77EA906A277B888400E41C0A /* SettingsVW.swift */,
 			);
@@ -172,7 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				77EA9058277B862300E41C0A /* Preview Assets.xcassets in Resources */,
-				77EA9074277BA9B700E41C0A /* JSON in Resources */,
+				7781D14C277BFE51006D57F5 /* JSON in Resources */,
 				77EA9055277B862300E41C0A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -184,10 +207,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7781D14A277BFE38006D57F5 /* Camera.swift in Sources */,
 				77EA9069277B887100E41C0A /* AlertsVW.swift in Sources */,
+				7781D148277BFE2E006D57F5 /* CameraMD.swift in Sources */,
 				77EA906B277B888400E41C0A /* SettingsVW.swift in Sources */,
+				7781D144277BFE10006D57F5 /* CheckBoxMD.swift in Sources */,
+				7781D146277BFE1F006D57F5 /* ListFieldMD.swift in Sources */,
 				77EA9070277B898E00E41C0A /* myClasses.swift in Sources */,
 				77EA905A277B862300E41C0A /* Persistence.swift in Sources */,
+				77EA9076277BAFAA00E41C0A /* DetailedFormVW.swift in Sources */,
 				77EA9065277B885300E41C0A /* HomeVW.swift in Sources */,
 				77EA9067277B886000E41C0A /* FormsVW.swift in Sources */,
 				77EA906D277B88C600E41C0A /* LoginVW.swift in Sources */,
