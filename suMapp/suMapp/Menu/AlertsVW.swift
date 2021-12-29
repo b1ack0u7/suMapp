@@ -2,18 +2,20 @@
 //  AlertsVW.swift
 //  suMapp
 //
-//  Created by Axel Montes de Oca on 07/12/21.
+//  Created by Axel Montes de Oca on 28/12/21.
 //
 
 import SwiftUI
 
 struct AlertsVW: View {
     var body: some View {
-        ZStack {
-            Color("ITF BG")
-                .ignoresSafeArea()
+        VStack {
             Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            ProgressView()
+                .progressViewStyle(LinearProgressViewStyle(tint: .red))
+            Spacer()
         }
+        
     }
 }
 

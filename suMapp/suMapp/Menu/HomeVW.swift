@@ -2,7 +2,7 @@
 //  HomeVW.swift
 //  suMapp
 //
-//  Created by Axel Montes de Oca on 07/12/21.
+//  Created by Axel Montes de Oca on 28/12/21.
 //
 
 import SwiftUI
@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeVW: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Item.entity(), sortDescriptors: [], animation: .default) private var items: FetchedResults<Item>
+    @EnvironmentObject var dataTrans: CLSDataTrans
     
     @State private var currentDate:String = ""
     @State private var currentTime:String = ""
@@ -77,24 +78,61 @@ struct HomeVW: View {
     
     private func updateData(dataForm:STCdataApi) {
         DispatchQueue.global(qos: .utility).async {
-            var newRegions:[Regions] = []
-            var newForm:[Form] = []
-            
+            var tmpRegions:[String] = []
             for i in 0..<dataForm.regions!.count {
-                newRegions.append(Regions(name: dataForm.regions![i].name))
+                tmpRegions.append(dataForm.regions![i].name)
             }
-            for i in 0..<dataForm.dataform!.count {
-                newForm.append(Form(functype: dataForm.dataform![i].functype, parameters: dataForm.dataform![i].parameters))
+            
+            var tmpSection:[mySection] = []
+            var tmpDataForm:[myForm] = []
+            for i in 0..<dataForm.sections!.count {
+                for j in 0..<dataForm.sections![i].dataform.count {
+                    tmpDataForm.append(myForm(functype: dataForm.sections![i].dataform[j].functype, parameters: dataForm.sections![i].dataform[j].parameters))
+                }
+                tmpSection.append(mySection(name: dataForm.sections![i].name, form: tmpDataForm))
             }
+            
+            let newRegions:Regions = Regions(region: tmpRegions)
+            let newSections:Sections = Sections(sections: tmpSection)
             
             items[0].regions = newRegions
-            items[0].form = newForm
+            items[0].sections = newSections
             do {
                 try viewContext.save()
                 print("Data updated")
+                setTransferableData()
             } catch {
                 let nsError = error as NSError
                 fatalError("DBGE: Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+        }
+    }
+    
+    private func setTransferableData() {
+        DispatchQueue.global(qos: .userInitiated).async {
+            var tmpRegions:[String] = []
+            for i in 0..<items[0].regions!.region.count {
+                tmpRegions.append(items[0].regions!.region[i])
+            }
+            DispatchQueue.main.async {
+                dataTrans.regions = tmpRegions
+            }
+        }
+        
+        DispatchQueue.global(qos: .background).async {
+            var tmpSections:[String] = []
+            var tmpDataFormAUX:[STCform] = []
+            var tmpDataForm:[[STCform]] = []
+            for i in 0..<(items[0].sections?.sections.count)! {
+                tmpSections.append((items[0].sections?.sections[i].name)!)
+                for j in 0..<(items[0].sections?.sections[i].form.count)! {
+                    tmpDataFormAUX.append(STCform(functype: items[0].sections!.sections[i].form[j].functype, parameters: items[0].sections!.sections[i].form[j].parameters))
+                }
+                tmpDataForm.append(tmpDataFormAUX)
+            }
+            DispatchQueue.main.async {
+                dataTrans.sections = tmpSections
+                dataTrans.dataForm = tmpDataForm
             }
         }
     }
@@ -120,6 +158,7 @@ struct HomeVW: View {
 struct HomeVW_Previews: PreviewProvider {
     static var previews: some View {
         HomeVW()
+            .environmentObject(CLSDataTrans())
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .preferredColorScheme(.dark)
     }

@@ -2,7 +2,7 @@
 //  Persistence.swift
 //  suMapp
 //
-//  Created by Axel Montes de Oca on 06/12/21.
+//  Created by Axel Montes de Oca on 28/12/21.
 //
 
 import CoreData
@@ -14,7 +14,9 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         let newItem = Item(context: viewContext)
-        newItem.regions = [Regions(name: "China"), Regions(name: "Japon"), Regions(name: "America"), Regions(name: "Oceania")]
+        newItem.regions = Regions(region: ["Region1","Region2","Region3"])
+        newItem.sections = Sections(sections: [mySection(name: "Sec1", form: [myForm(functype: "Type1", parameters: "param")])])
+        
         do {
             try viewContext.save()
         } catch {

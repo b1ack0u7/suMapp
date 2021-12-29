@@ -1,8 +1,8 @@
 //
 //  Camera.swift
-//  Banco de tiempo
+//  suMapp
 //
-//  Created by Axel Montes de Oca on 09/09/21.
+//  Created by Axel Montes de Oca on 28/12/21.
 //
 
 import SwiftUI

@@ -2,7 +2,7 @@
 //  DetailedFormVW.swift
 //  suMapp
 //
-//  Created by Axel Montes de Oca on 08/12/21.
+//  Created by Axel Montes de Oca on 28/12/21.
 //
 
 import SwiftUI
@@ -130,3 +130,4 @@ struct DetailedFormVW_Previews: PreviewProvider {
             .colorScheme(.dark)
     }
 }
+

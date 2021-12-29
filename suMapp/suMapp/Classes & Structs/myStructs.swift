@@ -2,18 +2,23 @@
 //  myStructs.swift
 //  suMapp
 //
-//  Created by Axel Montes de Oca on 08/12/21.
+//  Created by Axel Montes de Oca on 28/12/21.
 //
 
 import Foundation
 
 struct STCdataApi: Decodable {
     var regions:[STCinnerRegionAPI]?
-    var dataform:[STCinnerDataFormAPI]?
+    var sections:[STCinnerSectionAPI]?
 }
 
 struct STCinnerRegionAPI: Decodable {
     let name:String
+}
+
+struct STCinnerSectionAPI: Decodable {
+    let name:String
+    let dataform:[STCinnerDataFormAPI]
 }
 
 struct STCinnerDataFormAPI: Identifiable, Decodable {

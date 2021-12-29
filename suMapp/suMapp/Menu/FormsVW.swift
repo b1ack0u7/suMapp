@@ -2,7 +2,7 @@
 //  FormsVW.swift
 //  suMapp
 //
-//  Created by Axel Montes de Oca on 07/12/21.
+//  Created by Axel Montes de Oca on 28/12/21.
 //
 
 import SwiftUI
@@ -18,28 +18,31 @@ struct FormsVW: View {
         appearance.backgroundColor = UIColor(Color("ITF BG"))
         UINavigationBar.appearance().standardAppearance = appearance
     }
-    
-    @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(entity: Item.entity(), sortDescriptors: [], animation: .default) private var items: FetchedResults<Item>
-    
-    @State private var inteliBlock:Bool = true
+    @EnvironmentObject var dataTrans: CLSDataTrans
     @State private var dataForm:[STCform] = []
     
     var body: some View {
         NavigationView {
-            List(items[0].regions!.indices) { i in
-                NavigationLink(items[0].regions![i].name, destination: DetailedFormVW(region: items[0].regions![i].name, dataForm: dataForm))
-                    .listRowBackground(Color("ITF Menu"))
+            List {
+                ForEach(dataTrans.regions.indices, id:\.self) { idx in
+                    NavigationLink(dataTrans.regions[idx], destination: subView())
+                        .listRowBackground(Color("ITF Menu"))
+                }
             }
-            .disabled(inteliBlock)
             .navigationTitle("Regiones")
         }
-        .onAppear {
-            for i in 0..<items[0].form!.count {
-                dataForm.append(STCform(functype: items[0].form![i].functype, parameters: items[0].form![i].parameters))
+    }
+    
+    @ViewBuilder
+    private func subView() -> some View {
+        List {
+            ForEach(dataTrans.sections.indices, id:\.self) { idx in
+                NavigationLink(dataTrans.sections[idx], destination: DetailedFormVW(region: dataTrans.sections[idx], dataForm: dataTrans.dataForm[idx]))
+                    .listRowBackground(Color("ITF Menu"))
             }
-            inteliBlock = false
         }
+        .navigationTitle("Secciones")
+        .navigationBarTitleDisplayMode(.inline)
     }
     
 }
@@ -47,7 +50,8 @@ struct FormsVW: View {
 struct FormsVW_Previews: PreviewProvider {
     static var previews: some View {
         FormsVW()
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environmentObject(CLSDataTrans())
+            //.environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             //.colorScheme(.dark)
     }
 }

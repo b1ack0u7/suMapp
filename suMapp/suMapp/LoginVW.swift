@@ -2,7 +2,7 @@
 //  LoginVW.swift
 //  suMapp
 //
-//  Created by Axel Montes de Oca on 07/12/21.
+//  Created by Axel Montes de Oca on 28/12/21.
 //
 
 import SwiftUI
@@ -29,7 +29,7 @@ struct LoginVW: View {
     @Binding var isLogged:Bool
     @FocusState private var focusField: Field?
     
-    private let apiURL:String = "https://run.mocky.io/v3/edecfb65-643d-4a3e-aaef-d8b361bf1acd"
+    private let apiURL:String = "https://run.mocky.io/v3/6eb82708-0be4-4401-9870-b5b6ae531aed"
     
     var body: some View {
         ZStack {
@@ -169,6 +169,7 @@ struct LoginVW: View {
                     else {
                         UINotificationFeedbackGenerator().notificationOccurred(.error)
                         userData.pass = ""
+                        isLoading = false
                         showError = true
                     }
                 }
@@ -186,14 +187,7 @@ struct LoginVW: View {
                 guard let data = data else {return}
                 let decoded = try JSONDecoder().decode(STCdataApi.self, from: data)
                 DispatchQueue.main.async {
-                    UserDefaults.standard.set(true, forKey: "isLogged")
-                    UserDefaults.standard.set(userData.api, forKey: "api")
-                    UINotificationFeedbackGenerator().notificationOccurred(.success)
                     saveData(dataForm: decoded)
-                    isLoading = false
-                    withAnimation(.easeInOut) {
-                        isLogged.toggle()
-                    }
                 }
             } catch let error as NSError {
                 print("DBG: API error: ",error.localizedDescription)
@@ -203,25 +197,41 @@ struct LoginVW: View {
     
     private func saveData(dataForm:STCdataApi) {
         DispatchQueue.global(qos: .utility).async {
-            var newRegions:[Regions] = []
-            var newForm:[Form] = []
-            
+            var tmpRegions:[String] = []
             for i in 0..<dataForm.regions!.count {
-                newRegions.append(Regions(name: dataForm.regions![i].name))
+                tmpRegions.append(dataForm.regions![i].name)
             }
-            for i in 0..<dataForm.dataform!.count {
-                newForm.append(Form(functype: dataForm.dataform![i].functype, parameters: dataForm.dataform![i].parameters))
+            
+            var tmpSection:[mySection] = []
+            var tmpDataForm:[myForm] = []
+            for i in 0..<dataForm.sections!.count {
+                for j in 0..<dataForm.sections![i].dataform.count {
+                    tmpDataForm.append(myForm(functype: dataForm.sections![i].dataform[j].functype, parameters: dataForm.sections![i].dataform[j].parameters))
+                }
+                tmpSection.append(mySection(name: dataForm.sections![i].name, form: tmpDataForm))
             }
+            
+            let newRegions:Regions = Regions(region: tmpRegions)
+            let newSections:Sections = Sections(sections: tmpSection)
             
             let newItem = Item(context: viewContext)
             newItem.regions = newRegions
-            newItem.form = newForm
+            newItem.sections = newSections
+            
             do {
                 try viewContext.save()
                 print("Data saved")
+                
+                UserDefaults.standard.set(true, forKey: "isLogged")
+                UserDefaults.standard.set(userData.api, forKey: "api")
+                UINotificationFeedbackGenerator().notificationOccurred(.success)
+                isLoading = false
+                withAnimation(.easeInOut) {
+                    isLogged.toggle()
+                }
             } catch {
                 let nsError = error as NSError
-                fatalError("DBGE: Unresolved error \(nsError), \(nsError.userInfo)")
+                print("DBGE: Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
     }
