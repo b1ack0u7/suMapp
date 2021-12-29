@@ -14,34 +14,22 @@ struct CameraLayout: View {
     @Binding var pic:String
     @Binding var picState:Bool
     
+    @State private var isActiveTorch:Bool = false
+    @State private var inteliLockTorch:Bool = false //Disable torch?
+    
     var body: some View {
         ZStack {
             CameraPreview(camera: camera)
                 .ignoresSafeArea(.all, edges: .all)
             
             VStack {
-                if(camera.isTaken) {
-                    HStack {
-                        Spacer()
-                        
-                        Button(action: {
-                            camera.reTake()
-                        }, label: {
-                            Image(systemName: "arrow.triangle.2.circlepath.camera")
-                                .foregroundColor(.black)
-                                .padding()
-                                .background(Color.white)
-                                .clipShape(Circle())
-                        })
-                    }
-                    .padding([.top, .trailing], 20)
-                }
-                
                 Spacer()
                 
-                HStack {
+                ZStack {
                     if(camera.isTaken) {
+                        //Save Button
                         Button(action: {
+                            UINotificationFeedbackGenerator().notificationOccurred(.success)
                             pic = camera.picDataEncoded64
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                                 withAnimation(.easeInOut){
@@ -57,13 +45,39 @@ struct CameraLayout: View {
                                 .padding(.horizontal, 20)
                                 .background(Color.white)
                                 .clipShape(Capsule())
+                                .opacity(0.85)
                         })
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.leading)
                         
-                        Spacer()
+                        //Retake Button
+                        Button(action: {
+                            camera.reTake()
+                            inteliLockTorch = false
+                        }, label: {
+                            ZStack {
+                                Circle()
+                                    .fill(Color.white.opacity(0.85))
+                                    .frame(width: 65, height: 65, alignment: .center)
+                                Image(systemName: "arrow.triangle.2.circlepath.camera")
+                                    .font(.system(size: 25))
+                                    .foregroundColor(.black)
+                                    .padding()
+                            }
+                        })
+                        .frame(maxWidth: .infinity, alignment: .center)
                     }
                     else {
-                        Button(action: camera.takePic, label: {
+                        //Button Take Picture
+                        Button(action: {
+                            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                            camera.takePic()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                isActiveTorch = false
+                                camera.toggleTorch(on: isActiveTorch)
+                                inteliLockTorch = true
+                            }
+                        }, label: {
                             ZStack {
                                 Circle()
                                     .fill(Color.white)
@@ -72,8 +86,26 @@ struct CameraLayout: View {
                                     .stroke(Color.white, lineWidth: 2)
                                     .frame(width: 75, height: 75, alignment: .center)
                             }
+                            .opacity(0.85)
                         })
+                        .frame(maxWidth: .infinity, alignment: .center)
                     }
+                    
+                    //Button torch
+                    Button(action: {
+                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                        isActiveTorch.toggle()
+                        camera.toggleTorch(on: isActiveTorch)
+                    }, label: {
+                        Image(systemName: isActiveTorch ? "flashlight.on.fill" : "flashlight.off.fill")
+                            .foregroundColor(isActiveTorch ? .black : .white)
+                            .padding()
+                            .background(isActiveTorch ? Color.white.opacity(0.75) : Color.gray.opacity(0.75))
+                            .clipShape(Circle())
+                    })
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .padding(.trailing, 20)
+                    .disabled(inteliLockTorch)
                 }
                 .frame(height: 75)
             }
@@ -83,7 +115,6 @@ struct CameraLayout: View {
         }
     }
 }
-
 
 class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate {
     @Published var isTaken = false
@@ -95,6 +126,28 @@ class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate {
     
     @Published var picData = Data(count: 0)
     @Published var picDataEncoded64 = ""
+    
+    func toggleTorch(on: Bool) {
+        guard let device = AVCaptureDevice.default(for: .video) else { return }
+
+        if device.hasTorch {
+            do {
+                try device.lockForConfiguration()
+
+                if on == true {
+                    device.torchMode = .on
+                } else {
+                    device.torchMode = .off
+                }
+
+                device.unlockForConfiguration()
+            } catch {
+                print("DBGE: Torch could not be used")
+            }
+        } else {
+            print("DBGE: Torch is not available")
+        }
+    }
     
     func Check() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {

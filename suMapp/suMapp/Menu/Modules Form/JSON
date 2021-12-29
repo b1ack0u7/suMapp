@@ -57,7 +57,21 @@
           "parameters": "Retrolavado carbon:#Nolimit,#Aplicable"
         }
       ]
+    },
+    {
+      "name": "Sal Pellet y medios filtrantes",
+      "dataform": [
+        {
+          "functype": "checkBox",
+          "parameters": "Multimedia AG (o turbiedad):2:OK,IRREGULAR:1"
+        },
+        {
+          "functype": "checkBox",
+          "parameters": "Carbon Activado (o cloro):2:OK,IRREGULAR:1"
+        }
+      ]
     }
   ]
 }
+
 

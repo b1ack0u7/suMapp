@@ -90,6 +90,7 @@ struct HomeVW: View {
                     tmpDataForm.append(myForm(functype: dataForm.sections![i].dataform[j].functype, parameters: dataForm.sections![i].dataform[j].parameters))
                 }
                 tmpSection.append(mySection(name: dataForm.sections![i].name, form: tmpDataForm))
+                tmpDataForm = []
             }
             
             let newRegions:Regions = Regions(region: tmpRegions)
@@ -129,6 +130,7 @@ struct HomeVW: View {
                     tmpDataFormAUX.append(STCform(functype: items[0].sections!.sections[i].form[j].functype, parameters: items[0].sections!.sections[i].form[j].parameters))
                 }
                 tmpDataForm.append(tmpDataFormAUX)
+                tmpDataFormAUX = []
             }
             DispatchQueue.main.async {
                 dataTrans.sections = tmpSections

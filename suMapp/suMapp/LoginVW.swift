@@ -209,6 +209,7 @@ struct LoginVW: View {
                     tmpDataForm.append(myForm(functype: dataForm.sections![i].dataform[j].functype, parameters: dataForm.sections![i].dataform[j].parameters))
                 }
                 tmpSection.append(mySection(name: dataForm.sections![i].name, form: tmpDataForm))
+                tmpDataForm = []
             }
             
             let newRegions:Regions = Regions(region: tmpRegions)

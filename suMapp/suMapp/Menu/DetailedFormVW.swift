@@ -85,28 +85,28 @@ struct DetailedFormVW: View {
                     //Titulo : Cantidad de checks : Nombre de las checks {data1,data2} : Cantidad maxima a seleccionar
                     dataContainer.append(STCF_container(checkBox: STCF_checkBox(title: separated[0], quantity: Int(separated[1])!, tags: separated[2].components(separatedBy: ","), NumAccepted: Int(separated[3])!)))
                     
-                    print("DBGN: check")
+                    //print("DBGN: check")
                 
                 case .textField:
                     dataContainer.append(STCF_container())
-                    print("DBGN: text")
+                    //print("DBGN: text")
                 
                 case .listField:
                     //Titulo : Cantidad de items : Lista de items {#Sequence 1..<N} : Cantidad maxima a seleccionar
                     dataContainer.append(STCF_container(listField: STCF_listField(title: separated[0], quantity: Int(separated[1])!, tags: separated[2].components(separatedBy: ","), NumAccepted: Int(separated[3])!)))
                     
-                    print("DBGN: list")
+                    //print("DBGN: list")
                 
                 case .photo:
                     //Titulo
                     dataContainer.append(STCF_container())
-                    print("DBGN: photo")
+                    //print("DBGN: photo")
                 
                 case .stepper:
                     //Titulo : {#Nolimit 0..<N} {#Aplicable true,false}
                     dataContainer.append(STCF_container(stepper: STCF_stepper(title: separated[0], modificators: separated[1].components(separatedBy: ","))))
 
-                    print("DBGN: stepper")
+                    //print("DBGN: stepper")
                 
                 case .none:
                     print("DBGN: none")

@@ -108,6 +108,7 @@ struct ContentView: View {
                     tmpDataFormAUX.append(STCform(functype: items[0].sections!.sections[i].form[j].functype, parameters: items[0].sections!.sections[i].form[j].parameters))
                 }
                 tmpDataForm.append(tmpDataFormAUX)
+                tmpDataFormAUX = []
             }
             DispatchQueue.main.async {
                 dataTrans.sections = tmpSections
