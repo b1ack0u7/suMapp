@@ -29,7 +29,7 @@ struct ContentView: View {
                 case 2:
                     AlertsVW()
                 case 3:
-                    SettingsVW(isLogged: $isLogged)
+                    SettingsVW(isLogged: $isLogged, tabIndex: $tabIndex)
                 default:
                     Text("")
                 }
@@ -80,7 +80,6 @@ struct ContentView: View {
             .onAppear {
                 setTransferableData()
             }
-            
         }
         else {
             LoginVW(isLogged: $isLogged)
@@ -89,7 +88,7 @@ struct ContentView: View {
     }
     
     private func setTransferableData() {
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .background).async {
             var tmpRegions:[String] = []
             for i in 0..<items[0].regions!.region.count {
                 tmpRegions.append(items[0].regions!.region[i])

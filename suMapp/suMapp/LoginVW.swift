@@ -169,6 +169,7 @@ struct LoginVW: View {
                     else {
                         UINotificationFeedbackGenerator().notificationOccurred(.error)
                         userData.pass = ""
+                        isLoading = false
                         showError = true
                     }
                 }

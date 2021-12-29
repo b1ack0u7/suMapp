@@ -12,17 +12,19 @@ import UserNotifications
 //https://stackoverflow.com/questions/52275684/how-can-i-restart-an-application-programmatically-in-swift-4-on-ios/52278301#52278301
 
 struct SettingsVW: View {
-    @Binding var isLogged:Bool
-    @State private var showConfirm:Bool = false
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(entity: Item.entity(), sortDescriptors: [], animation: .default) private var items: FetchedResults<Item>
+    @EnvironmentObject var dataTrans: CLSDataTrans
     
+    @Binding var isLogged:Bool
+    @Binding var tabIndex:Int
+    @State private var showConfirm:Bool = false
     
     var body: some View {
         ZStack {
             Color("ITF BG")
                 .ignoresSafeArea()
             Button(action: {
-                UserDefaults.standard.removeObject(forKey: "isLogged")
-                UserDefaults.standard.removeObject(forKey: "api")
                 showConfirm = true
             }, label: {
                 VStack {
@@ -37,17 +39,43 @@ struct SettingsVW: View {
         Alert(title: Text("¿Desea cerrar sesión?"), message: Text("La aplicacion se cerrara y se guardara todos los datos"),
             primaryButton: .default (Text("Si")) {
             withAnimation(.easeInOut) {
+                clearData()
+                tabIndex = 0
                 isLogged = false
             }
             },
             secondaryButton: .cancel(Text("No"))
         )
     }
+    
+    private func clearData() {
+        //UserDefaults
+        UserDefaults.standard.removeObject(forKey: "isLogged")
+        UserDefaults.standard.removeObject(forKey: "api")
+        
+        //TransferableData
+        dataTrans.regions = []
+        dataTrans.sections = []
+        dataTrans.dataForm = []
+        
+        //CoreData
+        for data in items {
+            viewContext.delete(data)
+        }
+        do {
+            try viewContext.save()
+            print("CoreData Cleared")
+        } catch let error as NSError {
+            print("DBG: API error: ",error.localizedDescription)
+        }
+    }
 }
 
 struct SettingsVW_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsVW(isLogged: .constant(true))
+        SettingsVW(isLogged: .constant(true), tabIndex: .constant(0))
+            .environmentObject(CLSDataTrans())
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .colorScheme(.dark)
     }
 }

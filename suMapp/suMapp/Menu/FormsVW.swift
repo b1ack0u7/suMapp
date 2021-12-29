@@ -19,8 +19,6 @@ struct FormsVW: View {
         UINavigationBar.appearance().standardAppearance = appearance
     }
     @EnvironmentObject var dataTrans: CLSDataTrans
-    
-    @State private var inteliBlock:Bool = true
     @State private var dataForm:[STCform] = []
     
     var body: some View {
@@ -29,18 +27,9 @@ struct FormsVW: View {
                 ForEach(dataTrans.regions.indices, id:\.self) { idx in
                     NavigationLink(dataTrans.regions[idx], destination: subView())
                         .listRowBackground(Color("ITF Menu"))
-                        //.disabled(inteliBlock)
                 }
             }
             .navigationTitle("Regiones")
-        }
-        .onAppear {
-            /*
-            for i in 0..<items[0].form!.count {
-                dataForm.append(STCform(functype: items[0].form![i].functype, parameters: items[0].form![i].parameters))
-            }
-            inteliBlock = false
-             */
         }
     }
     
@@ -52,6 +41,8 @@ struct FormsVW: View {
                     .listRowBackground(Color("ITF Menu"))
             }
         }
+        .navigationTitle("Secciones")
+        .navigationBarTitleDisplayMode(.inline)
     }
     
 }
