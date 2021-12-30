@@ -17,6 +17,43 @@
       "name": "Condicion del equipo",
       "dataform": [
         {
+          "functype": "listField",
+          "parameters": "Sucursal:5:Sucursal1,Sucursal2,Sucursal3,Sucursal4,Sucursal5:1"
+        },
+        {
+          "functype": "checkBox",
+          "parameters": "By pass inicial:2:Si,No:1"
+        },
+        {
+          "functype": "checkBox",
+          "parameters": "Normal Inicial:2:Si,No:1"
+        },
+        {
+          "functype": "checkBox",
+          "parameters": "Apagado Inicial:2:Si,No:1"
+        },
+        {
+          "functype": "photo",
+          "parameters": "Evidencia Bypass agua cruda"
+        },
+        {
+          "functype": "photo",
+          "parameters": "Evidencia bypass agua filtrada"
+        },
+        {
+          "functype": "photo",
+          "parameters": "Evidencia bypass agua producto"
+        },
+        {
+          "functype": "photo",
+          "parameters": "Foto de pizarra"
+        }
+      ]
+    },
+    {
+      "name": "Sal Pellet y medios filtrantes",
+      "dataform": [
+        {
           "functype": "checkBox",
           "parameters": "Multimedia AG (o turbiedad):2:OK,IRREGULAR:1"
         },
@@ -50,28 +87,100 @@
         },
         {
           "functype": "stepper",
-          "parameters": "Retrolavado suavizador:#Nolimit"
+          "parameters": "Retrolavado suavizador:#Nolimit:#Required"
         },
         {
           "functype": "stepper",
-          "parameters": "Retrolavado carbon:#Nolimit,#Aplicable"
+          "parameters": "Retrolavado carbon:#Nolimit:#Optional"
         }
       ]
     },
     {
-      "name": "Sal Pellet y medios filtrantes",
+      "name": "Analisis fisico quimico de la calidad del agua",
+      "dataform": [
+        {
+          "functype": "divider",
+          "parameters": "Agua cruda"
+        },
+        {
+          "functype": "stepper",
+          "parameters": "Cloro libre (PPM) 0.2 - 1.5:0.2,1.5:#Required:0.1"
+        },
+        {
+          "functype": "stepper",
+          "parameters": "Cloro total (PPM) 0.2 - 1.5:0.2,1.5:#Required:0.1"
+        },
+        {
+          "functype": "stepper",
+          "parameters": "Dureza (PPM) 500 max:0,500:#Required"
+        },
+        {
+          "functype": "stepper",
+          "parameters": "Alcalinidad (PPM) 400 max:0,400:#Required"
+        },
+        {
+          "functype": "stepper",
+          "parameters": "PH 6.5 - 8.5:6.5,8.5:#Required:0.1"
+        },
+        {
+          "functype": "stepper",
+          "parameters": "TDS (PPM) 1000 max:0,1000:#Required:10"
+        },
+        {
+          "functype": "photo",
+          "parameters": "Evidencia TDS agua cruda"
+        },
+        {
+          "functype": "stepper",
+          "parameters": "Presion de operacion 45 - 60 (PSI):45,60:#Required"
+        }
+      ]
+    },
+    {
+      "name": "Revision de bombeo",
       "dataform": [
         {
           "functype": "checkBox",
-          "parameters": "Multimedia AG (o turbiedad):2:OK,IRREGULAR:1"
+          "parameters": "Funciona bomba:2:Si,No:1"
         },
         {
           "functype": "checkBox",
-          "parameters": "Carbon Activado (o cloro):2:OK,IRREGULAR:1"
+          "parameters": "Funciona switch de presion:2:Si,No:1"
+        },
+        {
+          "functype": "checkBox",
+          "parameters": "Funciona manometros:2:Si,No:1"
+        },
+        {
+          "functype": "checkBox",
+          "parameters": "Funciona tanque precargado:2:Si,No:1"
+        },
+        {
+          "functype": "checkBox",
+          "parameters": "Funciona proteccion de bomba:2:Si,No:1"
+        }
+      ]
+    },
+    {
+      "name": "Condiciones de equipo Final",
+      "dataform": [
+        {
+          "functype": "checkBox",
+          "parameters": "Bypass final:2:Ok,Irregular:1"
+        },
+        {
+          "functype": "checkBox",
+          "parameters": "Normal final:2:Ok,Irregular:1"
+        },
+        {
+          "functype": "checkBox",
+          "parameters": "Apagado final:2:Ok,Irregular:1"
+        },
+        {
+          "functype": "photo",
+          "parameters": "Evidencia final"
         }
       ]
     }
   ]
 }
-
-

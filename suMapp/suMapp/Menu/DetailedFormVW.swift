@@ -84,7 +84,6 @@ struct DetailedFormVW: View {
                 case .checkBox:
                     //Titulo : Cantidad de checks : Nombre de las checks {data1,data2} : Cantidad maxima a seleccionar
                     dataContainer.append(STCF_container(checkBox: STCF_checkBox(title: separated[0], quantity: Int(separated[1])!, tags: separated[2].components(separatedBy: ","), NumAccepted: Int(separated[3])!)))
-                    
                     //print("DBGN: check")
                 
                 case .textField:
@@ -92,20 +91,18 @@ struct DetailedFormVW: View {
                     //print("DBGN: text")
                 
                 case .listField:
-                    //Titulo : Cantidad de items : Lista de items {#Sequence 1..<N} : Cantidad maxima a seleccionar
+                    //Titulo : Cantidad de items : Lista de items {#Sequence 1..<N} : Cantidad maxima a seleccionar : {#Optional || #Required = default}
                     dataContainer.append(STCF_container(listField: STCF_listField(title: separated[0], quantity: Int(separated[1])!, tags: separated[2].components(separatedBy: ","), NumAccepted: Int(separated[3])!)))
-                    
                     //print("DBGN: list")
                 
                 case .photo:
-                    //Titulo
+                    //Titulo : {#Optional || #Required = default}
                     dataContainer.append(STCF_container())
                     //print("DBGN: photo")
                 
                 case .stepper:
-                    //Titulo : {#Nolimit 0..<N} {#Aplicable true,false}
+                    //Titulo : {#Nolimit 0..<N || 0,N} : {#Optional || #Required} : Paso a dar (1 = default)
                     dataContainer.append(STCF_container(stepper: STCF_stepper(title: separated[0], modificators: separated[1].components(separatedBy: ","))))
-
                     //print("DBGN: stepper")
                 
                 case .none:
@@ -126,8 +123,7 @@ struct DetailedFormVW_Previews: PreviewProvider {
         DetailedFormVW(region: "Bajio", dataForm: [
             STCform(functype: "checkBox", parameters: "Multimedia AG (o turbiedad):2:OK,IRREGULAR,Turbio,Neutro,Otro:1"),
             STCform(functype: "listField", parameters: "Nivel de sal inicial:3:Un tercio,Dos tercios,Tres tercios:1")])
-        
+
             .colorScheme(.dark)
     }
 }
-
