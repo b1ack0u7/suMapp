@@ -27,9 +27,9 @@ extension View {
 }
 
 class CLSDataTrans: ObservableObject {
-    @Published var dataForm:[[STCform]] = []
     @Published var regions:[String] = []
     @Published var sections:[String] = []
+    @Published var dataForm:[[STCform]] = []
 }
 
 public class myForm: NSObject, NSSecureCoding {

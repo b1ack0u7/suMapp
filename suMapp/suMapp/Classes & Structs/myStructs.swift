@@ -36,6 +36,13 @@ struct STCform:Identifiable {
     var results:String?
 }
 
+//DataTrans
+struct STCdataTrans {
+    var regions:[String] = []
+    var sections:[String] = []
+    var dataForm:[[STCform]] = []
+}
+
 //DetailedForm Structs
 struct STCF_checkBox {
     let title:String

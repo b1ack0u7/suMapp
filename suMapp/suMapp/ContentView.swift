@@ -9,17 +9,20 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(entity: Item.entity(), sortDescriptors: [], animation: .default) private var items: FetchedResults<Item>
-    
     var dataTrans = CLSDataTrans()
+    @State var isLogged:Bool
     
     @State private var tabIcons:[String] = ["house.fill","text.book.closed.fill","exclamationmark.triangle.fill","gear"]
     @State private var tabIndex:Int = 0
-    @State var isLogged:Bool
+    @State private var showLogin:Bool = true
+    @State private var dataToPass:STCdataTrans = STCdataTrans()
     
     var body: some View {
-        if(isLogged) {
+        if(showLogin) {
+            LoginVW(isLogged: $isLogged, showLogin: $showLogin, dataToPass: $dataToPass)
+                .transition(AnyTransition.opacity.animation(.easeInOut))
+        }
+        else {
             VStack(spacing: 0) {
                 switch tabIndex {
                 case 0:
@@ -29,7 +32,7 @@ struct ContentView: View {
                 case 2:
                     AlertsVW()
                 case 3:
-                    SettingsVW(isLogged: $isLogged, tabIndex: $tabIndex)
+                    SettingsVW(showLogin: $showLogin, tabIndex: $tabIndex)
                 default:
                     Text("")
                 }
@@ -75,48 +78,15 @@ struct ContentView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: 70, alignment: .center)
             }
-            .environmentObject(dataTrans)
             .transition(AnyTransition.opacity.animation(.easeInOut))
+            .environmentObject(dataTrans)
             .onAppear {
-                setTransferableData()
-            }
-        }
-        else {
-            LoginVW(isLogged: $isLogged)
-                .transition(AnyTransition.opacity.animation(.easeInOut))
-        }
-    }
-    
-    private func setTransferableData() {
-        DispatchQueue.global(qos: .background).async {
-            var tmpRegions:[String] = []
-            for i in 0..<items[0].regions!.region.count {
-                tmpRegions.append(items[0].regions!.region[i])
-            }
-            DispatchQueue.main.async {
-                dataTrans.regions = tmpRegions
-            }
-        }
-        
-        DispatchQueue.global(qos: .background).async {
-            var tmpSections:[String] = []
-            var tmpDataFormAUX:[STCform] = []
-            var tmpDataForm:[[STCform]] = []
-            for i in 0..<(items[0].sections?.sections.count)! {
-                tmpSections.append((items[0].sections?.sections[i].name)!)
-                for j in 0..<(items[0].sections?.sections[i].form.count)! {
-                    tmpDataFormAUX.append(STCform(functype: items[0].sections!.sections[i].form[j].functype, parameters: items[0].sections!.sections[i].form[j].parameters))
-                }
-                tmpDataForm.append(tmpDataFormAUX)
-                tmpDataFormAUX = []
-            }
-            DispatchQueue.main.async {
-                dataTrans.sections = tmpSections
-                dataTrans.dataForm = tmpDataForm
+                dataTrans.regions = dataToPass.regions
+                dataTrans.sections = dataToPass.sections
+                dataTrans.dataForm = dataToPass.dataForm
             }
         }
     }
-
 }
 
 struct ContentView_Previews: PreviewProvider {

@@ -16,7 +16,7 @@ struct SettingsVW: View {
     @FetchRequest(entity: Item.entity(), sortDescriptors: [], animation: .default) private var items: FetchedResults<Item>
     @EnvironmentObject var dataTrans: CLSDataTrans
     
-    @Binding var isLogged:Bool
+    @Binding var showLogin:Bool
     @Binding var tabIndex:Int
     @State private var showConfirm:Bool = false
     
@@ -41,7 +41,7 @@ struct SettingsVW: View {
             withAnimation(.easeInOut) {
                 clearData()
                 tabIndex = 0
-                isLogged = false
+                showLogin.toggle()
             }
             },
             secondaryButton: .cancel(Text("No"))
@@ -73,7 +73,7 @@ struct SettingsVW: View {
 
 struct SettingsVW_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsVW(isLogged: .constant(true), tabIndex: .constant(0))
+        SettingsVW(showLogin: .constant(false), tabIndex: .constant(0))
             .environmentObject(CLSDataTrans())
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             .colorScheme(.dark)
