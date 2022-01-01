@@ -30,19 +30,19 @@ private struct MultipleSelectionRow: View {
 
 struct ListFieldMD: View {
     @Environment(\.colorScheme) var colorScheme
-    
-    @Binding var dataForm:STCform
     let parameters:STCF_listField
     
-    //Selected only one
-    @State private var selectedItem:String = ""
     @State private var listFetch:[String] = [""]
     
-    //Selected more than one
+    //Select only one
+    @State private var selectedItem:String = ""
+    
+    //Select more than one
     @State private var selectionsItem:[String] = []
     
     var body: some View {
         if(parameters.NumAccepted == 1) {
+            //Select only one
             ZStack {
                 Color("ITF Menu")
                 
@@ -68,7 +68,7 @@ struct ListFieldMD: View {
             .cornerRadius(20)
             .frame(width: 350, height: 250, alignment: .center)
             .onAppear {
-                if(parameters.tags[0] == "#Sequence") {
+                if(ENMF_Keys(rawValue: parameters.tags[0])  == ENMF_Keys.sequence) {
                     listFetch = []
                     for i in 0...parameters.quantity {
                         listFetch.append(String(i))
@@ -80,6 +80,7 @@ struct ListFieldMD: View {
             }
         }
         else {
+            //Select more than one
             ZStack {
                 Color("ITF Menu")
                 
@@ -91,7 +92,7 @@ struct ListFieldMD: View {
                     Spacer()
                     
                     List {
-                        ForEach(parameters.tags, id: \.self) { item in
+                        ForEach(listFetch, id: \.self) { item in
                             MultipleSelectionRow(title: item, isSelected: selectionsItem.contains(item)) {
                                 if selectionsItem.contains(item) {
                                     selectionsItem.removeAll(where: { $0 == item })
@@ -112,6 +113,15 @@ struct ListFieldMD: View {
             .frame(width: 350, height: 250, alignment: .center)
             .onAppear {
                 UITableView.appearance().backgroundColor = UIColor(Color("ITF Menu"))
+                if(ENMF_Keys(rawValue: parameters.tags[0])  == ENMF_Keys.sequence) {
+                    listFetch = []
+                    for i in 0...parameters.quantity {
+                        listFetch.append(String(i))
+                    }
+                }
+                else {
+                    listFetch = parameters.tags
+                }
             }
         }
         
@@ -120,8 +130,7 @@ struct ListFieldMD: View {
 
 struct ListFieldMD_Previews: PreviewProvider {
     static var previews: some View {
-        ListFieldMD(dataForm: .constant(STCform(functype: "", parameters: "")),
-                    parameters: STCF_listField(title: "Nivel de sal inicial", quantity: 3, tags: ["Un tercio", "Dos tercios", "Tres tercios"], NumAccepted: 1))
+        ListFieldMD(parameters: STCF_listField(title: "Nivel de sal inicial", quantity: 3, tags: ["Un tercio", "Dos tercios", "Tres tercios"], NumAccepted: 1, modifier: ENMF_Keys.required))
             .colorScheme(.dark)
     }
 }

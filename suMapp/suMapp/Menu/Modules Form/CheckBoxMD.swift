@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct CheckBoxMD: View {
-    @Binding var dataForm:STCform
     let parameters:STCF_checkBox
     
     let col = [GridItem(.flexible(), spacing: 0),
@@ -100,8 +99,7 @@ struct CheckBoxMD: View {
 
 struct CheckBoxMD_Previews: PreviewProvider {
     static var previews: some View {
-        CheckBoxMD(dataForm: .constant(STCform(functype: "", parameters: "")),
-                   parameters: STCF_checkBox(title: "Multimedia AG (o turbiedad)", quantity: 2, tags: ["OK","IRREGULAR"], NumAccepted: 1))
+        CheckBoxMD(parameters: STCF_checkBox(title: "Multimedia AG (o turbiedad)", quantity: 2, tags: ["OK","IRREGULAR"], NumAccepted: 1))
     }
 }
 

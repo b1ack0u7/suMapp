@@ -25,6 +25,13 @@ extension View {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
+extension Collection where Indices.Iterator.Element == Index {
+    subscript (safe index: Index) -> Iterator.Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
+}
+
+
 
 class CLSDataTrans: ObservableObject {
     @Published var regions:[String] = []
@@ -60,8 +67,6 @@ public class myForm: NSObject, NSSecureCoding {
         coder.encode(parameters, forKey: Keys.parameters.rawValue)
     }
 }
-
-
 
 public class mySection: NSObject, NSSecureCoding {
     public static var supportsSecureCoding: Bool = true

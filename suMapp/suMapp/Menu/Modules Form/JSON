@@ -1,4 +1,4 @@
-{"user":"axelmontes@hotmail.com", "pass":"123456", "api":"https://run.mocky.io/v3/7c8c39f0-07b4-43bd-8008-b0ac96d9d0ba"}
+{"user":"axelmontes@hotmail.com", "pass":"123456", "api":"https://run.mocky.io/v3/1c3e9590-c9da-4082-8cee-75e32026d67d"}
 
 {
   "regions": [
@@ -87,11 +87,11 @@
         },
         {
           "functype": "stepper",
-          "parameters": "Retrolavado suavizador:#Nolimit:#Required"
+          "parameters": "Retrolavado suavizador:#Nolimit:#Required:1"
         },
         {
           "functype": "stepper",
-          "parameters": "Retrolavado carbon:#Nolimit:#Optional"
+          "parameters": "Retrolavado carbon:#Nolimit:#Optional:1"
         }
       ]
     },

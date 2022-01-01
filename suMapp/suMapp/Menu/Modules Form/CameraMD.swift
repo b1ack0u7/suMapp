@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CameraMD: View {
     @Environment(\.colorScheme) var colorScheme
-    @Binding var dataForm:STCform
+    let parameters:STCF_camera
     
     @State private var showCamera:Bool = false
     @State private var isPictureTaken:Bool = false
@@ -21,7 +21,7 @@ struct CameraMD: View {
                 .ignoresSafeArea()
             
             VStack {
-                Text("\(dataForm.parameters)")
+                Text("\(parameters.title)")
                     .font(.system(size: 20))
                     .padding(.top, 20)
                 Spacer()
@@ -56,7 +56,7 @@ struct CameraMD: View {
 
 struct CameraMD_Previews: PreviewProvider {
     static var previews: some View {
-        CameraMD(dataForm: .constant(STCform(functype: "photo", parameters: "Evidencia de nivel de sal inicial")))
+        CameraMD(parameters: STCF_camera(title: "Rendimiento de maquina", modifier: ENMF_Keys.required))
             .colorScheme(.dark)
     }
 }

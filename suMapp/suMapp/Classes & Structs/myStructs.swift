@@ -43,7 +43,25 @@ struct STCdataTrans {
     var dataForm:[[STCform]] = []
 }
 
+
 //DetailedForm Structs
+
+enum ENMF_Keys:String {
+    case optional = "#Optional"
+    case required = "#Required"
+    case sequence = "#Sequence"
+    case nolimit = "#Nolimit"
+}
+
+//Container
+struct STCF_container {
+    var checkBox:STCF_checkBox?
+    var listField:STCF_listField?
+    var camera:STCF_camera?
+    var stepper:STCF_stepper?
+}
+
+//Check Box
 struct STCF_checkBox {
     let title:String
     let quantity:Int
@@ -51,20 +69,23 @@ struct STCF_checkBox {
     let NumAccepted:Int
 }
 
+//List Field
 struct STCF_listField {
     let title:String
     let quantity:Int
     let tags:[String]
     let NumAccepted:Int
+    let modifier:ENMF_Keys
 }
 
+//Stepper
 struct STCF_stepper {
     let title:String
     let modificators:[String]
 }
 
-struct STCF_container {
-    var checkBox:STCF_checkBox?
-    var listField:STCF_listField?
-    var stepper:STCF_stepper?
+//Camera
+struct STCF_camera {
+    let title:String
+    let modifier:ENMF_Keys
 }

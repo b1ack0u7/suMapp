@@ -17,15 +17,15 @@ struct LoginVW: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Item.entity(), sortDescriptors: [], animation: .default) private var items: FetchedResults<Item>
     
-    @Binding var isLogged:Bool
-    @Binding var showLogin:Bool
-    @Binding var dataToPass:STCdataTrans
-    @FocusState private var focusField: Field?
-    
     private enum Field {
         case user
         case pass
     }
+    
+    @Binding var isLogged:Bool
+    @Binding var showLogin:Bool
+    @Binding var dataToPass:STCdataTrans
+    @FocusState private var focusField: Field?
     
     @State private var userData:UserData = UserData()
     @State private var isLoading:Bool = false
@@ -33,7 +33,7 @@ struct LoginVW: View {
     @State private var showError:Bool = false
     @State private var verboseLoading:String = ""
     
-    private let apiURL:String = "https://run.mocky.io/v3/6eb82708-0be4-4401-9870-b5b6ae531aed"
+    private let apiURL:String = "https://run.mocky.io/v3/b316243d-baf9-4538-9b19-706b394348a4"
     
     var body: some View {
         ZStack {

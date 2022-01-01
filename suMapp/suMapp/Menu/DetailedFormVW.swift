@@ -17,6 +17,7 @@ struct DetailedFormVW: View {
         case listField = "listField"
         case photo = "photo"
         case stepper = "stepper"
+        case divider = "divider"
     }
     
     @State private var dataContainer:[STCF_container] = []
@@ -47,7 +48,7 @@ struct DetailedFormVW: View {
                         ForEach(dataForm.indices, id:\.self) { idx in
                             switch (Keys(rawValue: dataForm[idx].functype)) {
                             case .checkBox:
-                                CheckBoxMD(dataForm: $dataForm[idx], parameters: dataContainer[idx].checkBox!)
+                                CheckBoxMD(parameters: dataContainer[idx].checkBox!)
                                     .padding(.bottom, 20)
                                 
                             case .textField:
@@ -55,15 +56,19 @@ struct DetailedFormVW: View {
                                     .padding(.bottom, 20)
                                 
                             case .listField:
-                                ListFieldMD(dataForm: $dataForm[idx], parameters: dataContainer[idx].listField!)
+                                ListFieldMD(parameters: dataContainer[idx].listField!)
                                     .padding(.bottom, 20)
                                 
                             case .photo:
-                                CameraMD(dataForm: $dataForm[idx])
+                                CameraMD(parameters: dataContainer[idx].camera!)
                                     .padding(.bottom, 20)
                                 
-                            case.stepper:
+                            case .stepper:
                                 Text("Stepper")
+                                    .padding(.bottom, 20)
+                                
+                            case .divider:
+                                Text("Divider")
                                     .padding(.bottom, 20)
                                 
                             case .none:
@@ -91,20 +96,23 @@ struct DetailedFormVW: View {
                     //print("DBGN: text")
                 
                 case .listField:
-                    //Titulo : Cantidad de items : Lista de items {#Sequence 1..<N} : Cantidad maxima a seleccionar : {#Optional || #Required = default}
-                    dataContainer.append(STCF_container(listField: STCF_listField(title: separated[0], quantity: Int(separated[1])!, tags: separated[2].components(separatedBy: ","), NumAccepted: Int(separated[3])!)))
+                    //Titulo : Cantidad de items : {Lista de items || #Sequence -> 1..<N} : Cantidad maxima a seleccionar : {#Optional || #Required = default}
+                    dataContainer.append(STCF_container(listField: STCF_listField(title: separated[0], quantity: Int(separated[1])!, tags: separated[2].components(separatedBy: ","), NumAccepted: Int(separated[3])!, modifier: ENMF_Keys(rawValue: separated[safe: 4] ?? ENMF_Keys.required.rawValue)!)))
                     //print("DBGN: list")
                 
                 case .photo:
                     //Titulo : {#Optional || #Required = default}
-                    dataContainer.append(STCF_container())
+                    dataContainer.append(STCF_container(camera: STCF_camera(title: separated[0], modifier: ENMF_Keys(rawValue: separated[safe:1] ?? ENMF_Keys.required.rawValue)!)))
                     //print("DBGN: photo")
                 
                 case .stepper:
-                    //Titulo : {#Nolimit 0..<N || 0,N} : {#Optional || #Required} : Paso a dar (1 = default)
+                    //Titulo : {#Nolimit -> 0..<N || Lista -> 0,N} : {#Optional || #Required} : Paso a dar (1 = default)
                     dataContainer.append(STCF_container(stepper: STCF_stepper(title: separated[0], modificators: separated[1].components(separatedBy: ","))))
                     //print("DBGN: stepper")
                 
+                case .divider:
+                    dataContainer.append(STCF_container())
+                    
                 case .none:
                     print("DBGN: none")
                 }
