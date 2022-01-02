@@ -1,4 +1,4 @@
-{"user":"axelmontes@hotmail.com", "pass":"123456", "api":"https://run.mocky.io/v3/1c3e9590-c9da-4082-8cee-75e32026d67d"}
+{"user":"axelmontes@hotmail.com", "pass":"123456", "api":"https://run.mocky.io/v3/d6ac74d4-b091-419d-94c3-961553e5f4da"}
 
 {
   "regions": [
@@ -87,11 +87,11 @@
         },
         {
           "functype": "stepper",
-          "parameters": "Retrolavado suavizador:#Nolimit:#Required:1"
+          "parameters": "Retrolavado suavizador:#Nolimit:1:%.0f:#Required"
         },
         {
           "functype": "stepper",
-          "parameters": "Retrolavado carbon:#Nolimit:#Optional:1"
+          "parameters": "Retrolavado carbon:#Nolimit:1:%.0f:#Optional"
         }
       ]
     },
@@ -104,27 +104,23 @@
         },
         {
           "functype": "stepper",
-          "parameters": "Cloro libre (PPM) 0.2 - 1.5:0.2,1.5:#Required:0.1"
+          "parameters": "Cloro libre (PPM) 0.2 - 1.5:0.2,1.5:0.1:%.1f:#Required"
         },
         {
           "functype": "stepper",
-          "parameters": "Cloro total (PPM) 0.2 - 1.5:0.2,1.5:#Required:0.1"
+          "parameters": "Cloro total (PPM) 0.2 - 1.5:0.2,1.5:0.1:%.1f:#Required"
         },
         {
           "functype": "stepper",
-          "parameters": "Dureza (PPM) 500 max:0,500:#Required"
+          "parameters": "Dureza (PPM) 500 max:0,500:5:%.0f:#Required"
         },
         {
           "functype": "stepper",
-          "parameters": "Alcalinidad (PPM) 400 max:0,400:#Required"
+          "parameters": "Alcalinidad (PPM) 400 max:0,400:1:%.0f:#Required"
         },
         {
           "functype": "stepper",
-          "parameters": "PH 6.5 - 8.5:6.5,8.5:#Required:0.1"
-        },
-        {
-          "functype": "stepper",
-          "parameters": "TDS (PPM) 1000 max:0,1000:#Required:10"
+          "parameters": "PH 6.5 - 8.5:6.5,8.5:0.1:%.1f:#Required"
         },
         {
           "functype": "photo",
@@ -132,7 +128,7 @@
         },
         {
           "functype": "stepper",
-          "parameters": "Presion de operacion 45 - 60 (PSI):45,60:#Required"
+          "parameters": "Presion de operacion 45 - 60 (PSI):45,60:1:%.0f:#Required"
         }
       ]
     },

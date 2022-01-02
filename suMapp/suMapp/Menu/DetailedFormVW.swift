@@ -64,7 +64,7 @@ struct DetailedFormVW: View {
                                     .padding(.bottom, 20)
                                 
                             case .stepper:
-                                Text("Stepper")
+                                StepperMD(parameters: dataContainer[idx].stepper!)
                                     .padding(.bottom, 20)
                                 
                             case .divider:
@@ -80,6 +80,16 @@ struct DetailedFormVW: View {
                 }
                 .transition(AnyTransition.opacity.animation(.easeInOut))
             }
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .keyboard, content: {
+                Spacer()
+                Button(action: {
+                    hideKeyboard()
+                }, label: {
+                    Text("Done")
+                })
+            })
         }
         .onAppear {
             for i in 0..<dataForm.count {
@@ -106,8 +116,8 @@ struct DetailedFormVW: View {
                     //print("DBGN: photo")
                 
                 case .stepper:
-                    //Titulo : {#Nolimit -> 0..<N || Lista -> 0,N} : {#Optional || #Required} : Paso a dar (1 = default)
-                    dataContainer.append(STCF_container(stepper: STCF_stepper(title: separated[0], modificators: separated[1].components(separatedBy: ","))))
+                    //Titulo : {#Nolimit -> 0..<N || Lista -> 0,N} : Paso a dar : Formato de numero {%.0f = default} : {#Optional || #Required = default}
+                    dataContainer.append(STCF_container(stepper: STCF_stepper(title: separated[0], tags: separated[1], step: Double(separated[2])!, formatt: separated[3], modifier: ENMF_Keys(rawValue: separated[safe: 4] ?? ENMF_Keys.required.rawValue)!)))
                     //print("DBGN: stepper")
                 
                 case .divider:
@@ -130,7 +140,8 @@ struct DetailedFormVW_Previews: PreviewProvider {
     static var previews: some View {
         DetailedFormVW(region: "Bajio", dataForm: [
             STCform(functype: "checkBox", parameters: "Multimedia AG (o turbiedad):2:OK,IRREGULAR,Turbio,Neutro,Otro:1"),
-            STCform(functype: "listField", parameters: "Nivel de sal inicial:3:Un tercio,Dos tercios,Tres tercios:1")])
+            STCform(functype: "listField", parameters: "Nivel de sal inicial:3:Un tercio,Dos tercios,Tres tercios:1"),
+            STCform(functype: "stepper", parameters: "Cloro libre (PPM) 0.2 - 1.5:0.2,1.5:0.1:%.1f:#Required")])
 
             .colorScheme(.dark)
     }

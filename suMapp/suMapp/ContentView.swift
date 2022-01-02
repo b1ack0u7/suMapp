@@ -80,6 +80,7 @@ struct ContentView: View {
             }
             .transition(AnyTransition.opacity.animation(.easeInOut))
             .environmentObject(dataTrans)
+            .ignoresSafeArea(.keyboard, edges: .bottom)
             .onAppear {
                 dataTrans.regions = dataToPass.regions
                 dataTrans.sections = dataToPass.sections

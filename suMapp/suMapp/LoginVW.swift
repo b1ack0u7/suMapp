@@ -33,7 +33,7 @@ struct LoginVW: View {
     @State private var showError:Bool = false
     @State private var verboseLoading:String = ""
     
-    private let apiURL:String = "https://run.mocky.io/v3/b316243d-baf9-4538-9b19-706b394348a4"
+    private let apiURL:String = "https://run.mocky.io/v3/90d9a54d-29ea-495f-afbe-cb21a924cc10"
     
     var body: some View {
         ZStack {

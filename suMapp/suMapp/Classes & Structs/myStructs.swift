@@ -81,7 +81,10 @@ struct STCF_listField {
 //Stepper
 struct STCF_stepper {
     let title:String
-    let modificators:[String]
+    let tags:String
+    let step:Double
+    let formatt:String
+    let modifier:ENMF_Keys
 }
 
 //Camera
