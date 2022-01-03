@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-struct StepperMD: View {
+struct StepperMD: View, KeyboardReadable {
     let parameters:STCF_stepper
     
+    @FocusState private var isFocusedTextField:Bool
     @State private var numMin:Double = 0.0
     @State private var numMax:Double = 5.0
     @State private var myNumber:Double = 0.0
@@ -40,14 +41,11 @@ struct StepperMD: View {
                         .padding(.top, 1)
                         .multilineTextAlignment(.center)
                         .frame(width: 100)
+                        .focused($isFocusedTextField)
                         .onChange(of: numberS, perform: { newValue in
                             let tmpNumb = Double(numberS) ?? numMin
                             if(tmpNumb >= numMin && tmpNumb <= numMax) {
                                 myNumber = tmpNumb
-                            }
-                            else if(tmpNumb < numMin) {
-                                myNumber = numMin
-                                numberS = String(format:parameters.formatt, myNumber)
                             }
                             else if(tmpNumb > numMax) {
                                 myNumber = numMax
@@ -82,6 +80,14 @@ struct StepperMD: View {
         }
         .cornerRadius(20)
         .frame(width: 350, height: 180, alignment: .center)
+        .onChange(of: isFocusedTextField, perform: { _ in
+            let tmpNumb = Double(numberS) ?? numMin
+            print("DBG \(tmpNumb)")
+            if(tmpNumb < numMin) {
+                myNumber = numMin
+                numberS = String(format:parameters.formatt, myNumber)
+            }
+        })
         .onAppear {
             if(ENMF_Keys(rawValue: parameters.tags) != ENMF_Keys.nolimit) {
                 let tags = parameters.tags.components(separatedBy: ",")
