@@ -40,8 +40,8 @@ struct DetailedFormVW: View {
                         .scaleEffect(1.5)
                 }
                 .transition(AnyTransition.opacity.animation(.easeInOut))
-                
             }
+            
             else {
                 VStack {
                     ScrollView(showsIndicators: false) {
@@ -92,6 +92,7 @@ struct DetailedFormVW: View {
             })
         }
         .onAppear {
+            UIToolbar.appearance().barTintColor = UIColor.systemGray5
             for i in 0..<dataForm.count {
                 let separated = dataForm[i].parameters.components(separatedBy: ":")
                 

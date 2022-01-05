@@ -19,32 +19,18 @@ struct FormsVW: View {
         UINavigationBar.appearance().standardAppearance = appearance
     }
     @EnvironmentObject var dataTrans: CLSDataTrans
-    @State private var dataForm:[STCform] = []
     
     var body: some View {
         NavigationView {
             List {
                 ForEach(dataTrans.regions.indices, id:\.self) { idx in
-                    NavigationLink(dataTrans.regions[idx], destination: subView())
+                    NavigationLink(dataTrans.regions[idx], destination: FormSubVW(selectedRegion: dataTrans.regions[idx]))
                         .listRowBackground(Color("ITF Menu"))
                 }
             }
             .navigationTitle("Regiones")
         }
     }
-    
-    @ViewBuilder
-    private func subView() -> some View {
-        List {
-            ForEach(dataTrans.sections.indices, id:\.self) { idx in
-                NavigationLink(dataTrans.sections[idx], destination: DetailedFormVW(region: dataTrans.sections[idx], dataForm: dataTrans.dataForm[idx]))
-                    .listRowBackground(Color("ITF Menu"))
-            }
-        }
-        .navigationTitle("Secciones")
-        .navigationBarTitleDisplayMode(.inline)
-    }
-    
 }
 
 struct FormsVW_Previews: PreviewProvider {
