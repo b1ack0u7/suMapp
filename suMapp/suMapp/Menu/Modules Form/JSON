@@ -1,52 +1,93 @@
+{
+  "functype": "checkBox",
+  "title": "By pass inicial",
+  "itemsQuantity": 2,
+  "itemsList": ["data1","data2"],
+  "itemsMaxToSelect": 1,
+  "modifiers": []
+}
+{
+  "functype": "listField",
+  "title": "Sucursales",
+  "itemsQuantity": 5,
+  "itemsList": ["Sucursal1", "Sucursal2", "Sucursal3", "Sucursal4", "Sucursal5"],
+  "itemsMaxToSelect": 1,
+  "modifiers": []
+}
+{
+  "functype": "photo",
+  "title": "Evidencia",
+  "modifiers": []
+}
+{
+  "functype": "stepper",
+  "title": "Retrolavado",
+  "itemRange": ,
+  "step": 1,
+  "numberFormat": "%.0f",
+  "modifiers": []
+}
+
+
 {"user":"axelmontes@hotmail.com", "pass":"123456", "api":"https://run.mocky.io/v3/d6ac74d4-b091-419d-94c3-961553e5f4da"}
 
 {
-  "regions": [
-    {
-      "name": "Bajio"
-    },
-    {
-      "name": "Norte"
-    },
-    {
-      "name": "Occidente"
-    }
-  ],
+  "regions": ["Bajio","Norte","Occidente"],
   "sections": [
     {
       "name": "Condicion del equipo",
       "dataform": [
         {
           "functype": "listField",
-          "parameters": "Sucursal:5:Sucursal1,Sucursal2,Sucursal3,Sucursal4,Sucursal5:1"
+          "title": "Sucursales",
+          "itemsQuantity": 5,
+          "itemsList": ["Sucursal1", "Sucursal2", "Sucursal3", "Sucursal4", "Sucursal5"],
+          "itemsMaxToSelect": 1,
+          "modifiers": []
         },
         {
           "functype": "checkBox",
-          "parameters": "By pass inicial:2:Si,No:1"
+          "title": "By pass inicial",
+          "itemsQuantity": 2,
+          "itemsList": ["Si","No"],
+          "itemsMaxToSelect": 1,
+          "modifiers": []
         },
         {
           "functype": "checkBox",
-          "parameters": "Normal Inicial:2:Si,No:1"
+          "title": "Normal Inicial",
+          "itemsQuantity": 2,
+          "itemsList": ["Si","No"],
+          "itemsMaxToSelect": 1,
+          "modifiers": []
         },
         {
           "functype": "checkBox",
-          "parameters": "Apagado Inicial:2:Si,No:1"
+          "title": "Apagado Inicial",
+          "itemsQuantity": 2,
+          "itemsList": ["Si","No"],
+          "itemsMaxToSelect": 1,
+          "modifiers": []
         },
         {
           "functype": "photo",
-          "parameters": "Evidencia Bypass agua cruda"
+          "title": "Evidencia Bypass agua cruda",
+          "modifiers": []
         },
         {
           "functype": "photo",
-          "parameters": "Evidencia bypass agua filtrada"
+          "title": "Evidencia bypass agua filtrada",
+          "modifiers": []
         },
         {
           "functype": "photo",
-          "parameters": "Evidencia bypass agua producto"
+          "title": "Evidencia bypass agua producto",
+          "modifiers": []
         },
         {
           "functype": "photo",
-          "parameters": "Foto de pizarra"
+          "title": "Foto de pizarra",
+          "modifiers": []
         }
       ]
     },
@@ -55,43 +96,75 @@
       "dataform": [
         {
           "functype": "checkBox",
-          "parameters": "Multimedia AG (o turbiedad):2:OK,IRREGULAR:1"
+          "title": "Multimedia AG (o turbiedad)",
+          "itemsQuantity": 2,
+          "itemsList": ["Ok","Irregular"],
+          "itemsMaxToSelect": 1,
+          "modifiers": []
         },
         {
           "functype": "checkBox",
-          "parameters": "Carbon Activado (o cloro):2:OK,IRREGULAR:1"
+          "title": "Carbon Activado (o cloro)",
+          "itemsQuantity": 2,
+          "itemsList": ["Ok","Irregular"],
+          "itemsMaxToSelect": 1,
+          "modifiers": []
         },
         {
           "functype": "checkBox",
-          "parameters": "Resina (o 100 PPM dureza):2:OK,IRREGULAR:1"
+          "title": "Resina (o 100 PPM dureza)",
+          "itemsQuantity": 2,
+          "itemsList": ["Ok","Irregular"],
+          "itemsMaxToSelect": 1,
+          "modifiers": []
         },
         {
           "functype": "listField",
-          "parameters": "Nivel de sal inicial:3:Un tercio,Dos tercios,Tres tercios:1"
+          "title": "Nivel de sal inicial",
+          "itemsQuantity": 3,
+          "itemsList": ["Un tercio", "Dos tercios", "Tres tercios"],
+          "itemsMaxToSelect": 1,
+          "modifiers": []
         },
         {
           "functype": "photo",
-          "parameters": "Evidencia de Sal Inicial"
+          "title": "Evidencia de Sal Inicial",
+          "modifiers": []
         },
         {
           "functype": "listField",
-          "parameters": "Recargas de bultos de sal:10:#Sequence:1"
+          "title": "Recargas de bultos de sal",
+          "itemsQuantity": 10,
+          "itemsList": [],
+          "itemsMaxToSelect": 1,
+          "modifiers": ["#Sequence"]
         },
         {
           "functype": "listField",
-          "parameters": "Nivel de sal final:3:Un tercio,Dos tercios,Tres tercios:1"
+          "title": "Nivel de sal final",
+          "itemsQuantity": 3,
+          "itemsList": ["Un tercio", "Dos tercios", "Tres tercios"],
+          "itemsMaxToSelect": 1,
+          "modifiers": []
         },
         {
           "functype": "photo",
-          "parameters": "Evidencia de Sal Final"
+          "title": "Evidencia de Sal Final",
+          "modifiers": []
         },
         {
           "functype": "stepper",
-          "parameters": "Retrolavado suavizador:#Nolimit:1:%.0f:#Required"
+          "title": "Retrolavado suavizador",
+          "itemRange": [],
+          "step": 1,
+          "numberFormat": "%.0f",
+          "modifiers": ["#Nolimit","#Required"]
         },
         {
           "functype": "stepper",
-          "parameters": "Retrolavado carbon:#Nolimit:1:%.0f:#Optional"
+          "title": "Retrolavado carbon",
+          "numberFormat": "%.0f",
+          "modifiers": ["#Optional"]
         }
       ]
     },
@@ -100,35 +173,59 @@
       "dataform": [
         {
           "functype": "divider",
-          "parameters": "Agua cruda"
+          "title": "Agua cruda"
         },
         {
           "functype": "stepper",
-          "parameters": "Cloro libre (PPM) 0.2 - 1.5:0.2,1.5:0.1:%.1f:#Required"
+          "title": "Cloro libre (PPM) 0.2 - 1.5",
+          "itemRange": [0.2,1.5],
+          "step": 0.1,
+          "numberFormat": "%.1f",
+          "modifiers": ["#Required"]
         },
         {
           "functype": "stepper",
-          "parameters": "Cloro total (PPM) 0.2 - 1.5:0.2,1.5:0.1:%.1f:#Required"
+          "title": "Cloro total (PPM) 0.2 - 1.5",
+          "itemRange": [0.2,1.5],
+          "step": 0.1,
+          "numberFormat": "%.1f",
+          "modifiers": ["#Required"]
         },
         {
           "functype": "stepper",
-          "parameters": "Dureza (PPM) 500 max:0,500:5:%.0f:#Required"
+          "title": "Dureza (PPM) 500 max",
+          "itemRange": [0,500],
+          "step": 5,
+          "numberFormat": "%.0f",
+          "modifiers": ["#Required"]
         },
         {
           "functype": "stepper",
-          "parameters": "Alcalinidad (PPM) 400 max:0,400:1:%.0f:#Required"
+          "title": "Alcalinidad (PPM) 400 max",
+          "itemRange": [0,400],
+          "step": 1,
+          "numberFormat": "%.0f",
+          "modifiers": ["#Required"]
         },
         {
           "functype": "stepper",
-          "parameters": "PH 6.5 - 8.5:6.5,8.5:0.1:%.1f:#Required"
+          "title": "PH",
+          "itemRange": [6.5,8.5],
+          "step": 0.1,
+          "numberFormat": "%.1f",
+          "modifiers": ["#Required"]
         },
         {
           "functype": "photo",
-          "parameters": "Evidencia TDS agua cruda"
+          "title": "Evidencia TDS agua cruda"
         },
         {
           "functype": "stepper",
-          "parameters": "Presion de operacion 45 - 60 (PSI):45,60:1:%.0f:#Required"
+          "title": "Presion de operacion (PSI)",
+          "itemRange": [45,60],
+          "step": 1,
+          "numberFormat": "%.0f",
+          "modifiers": ["#Required"]
         }
       ]
     },
@@ -137,23 +234,43 @@
       "dataform": [
         {
           "functype": "checkBox",
-          "parameters": "Funciona bomba:2:Si,No:1"
+          "title": "Funciona bomba",
+          "itemsQuantity": 2,
+          "itemsList": ["Si","No"],
+          "itemsMaxToSelect": 1,
+          "modifiers": []
         },
         {
           "functype": "checkBox",
-          "parameters": "Funciona switch de presion:2:Si,No:1"
+          "title": "Funciona switch de presion",
+          "itemsQuantity": 2,
+          "itemsList": ["Si","No"],
+          "itemsMaxToSelect": 1,
+          "modifiers": []
         },
         {
           "functype": "checkBox",
-          "parameters": "Funciona manometros:2:Si,No:1"
+          "title": "Funciona manometros",
+          "itemsQuantity": 2,
+          "itemsList": ["Si","No"],
+          "itemsMaxToSelect": 1,
+          "modifiers": []
         },
         {
           "functype": "checkBox",
-          "parameters": "Funciona tanque precargado:2:Si,No:1"
+          "title": "Funciona tanque precargado",
+          "itemsQuantity": 2,
+          "itemsList": ["Si","No"],
+          "itemsMaxToSelect": 1,
+          "modifiers": []
         },
         {
           "functype": "checkBox",
-          "parameters": "Funciona proteccion de bomba:2:Si,No:1"
+          "title": "Funciona proteccion de bomba",
+          "itemsQuantity": 2,
+          "itemsList": ["Si","No"],
+          "itemsMaxToSelect": 1,
+          "modifiers": []
         }
       ]
     },
@@ -162,19 +279,31 @@
       "dataform": [
         {
           "functype": "checkBox",
-          "parameters": "Bypass final:2:Ok,Irregular:1"
+          "title": "Bypass final",
+          "itemsQuantity": 2,
+          "itemsList": ["Ok","Irregular"],
+          "itemsMaxToSelect": 1,
+          "modifiers": []
         },
         {
           "functype": "checkBox",
-          "parameters": "Normal final:2:Ok,Irregular:1"
+          "title": "Normal final",
+          "itemsQuantity": 2,
+          "itemsList": ["Ok","Irregular"],
+          "itemsMaxToSelect": 1,
+          "modifiers": []
         },
         {
           "functype": "checkBox",
-          "parameters": "Apagado final:2:Ok,Irregular:1"
+          "title": "Apagado final",
+          "itemsQuantity": 2,
+          "itemsList": ["Ok","Irregular"],
+          "itemsMaxToSelect": 1,
+          "modifiers": []
         },
         {
           "functype": "photo",
-          "parameters": "Evidencia final"
+          "title": "Evidencia final"
         }
       ]
     }
