@@ -56,7 +56,8 @@ struct CameraMD: View {
 
 struct CameraMD_Previews: PreviewProvider {
     static var previews: some View {
-        CameraMD(parameters: STCF_camera(title: "Rendimiento de maquina", modifier: ENMF_Keys.required))
+        CameraMD(parameters: STCF_camera(title: "Rendimiento de maquina", modifier: [ENMF_Keys.required]))
+        //CameraMD(parameters: STCF_camera(title: "Rendimiento de maquina", modifier: ENMF_Keys.required))
             .colorScheme(.dark)
     }
 }

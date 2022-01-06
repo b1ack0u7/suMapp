@@ -28,11 +28,11 @@ struct CheckBoxMD: View {
                         .padding(.top, 20)
                     
                     Spacer()
-                    if(parameters.tags.count == 2) {
+                    if(parameters.itemsList.count == 2) {
                         HStack(spacing: 60) {
-                            ForEach(parameters.tags.indices, id: \.self) { idx in
+                            ForEach(parameters.itemsList.indices, id: \.self) { idx in
                                 VStack(spacing: 10) {
-                                    Text("\(parameters.tags[idx])")
+                                    Text("\(parameters.itemsList[idx])")
                                     Image(systemName: checkedBool[idx] ? "checkmark.square.fill" : "square")
                                         .font(.system(size: 20))
                                         .foregroundColor(checkedBool[idx] ? Color(UIColor.systemBlue) : Color.secondary)
@@ -50,9 +50,9 @@ struct CheckBoxMD: View {
                     }
                     else {
                         LazyVGrid(columns: col, spacing: 20) {
-                            ForEach(parameters.tags.indices, id: \.self) { idx in
+                            ForEach(parameters.itemsList.indices, id: \.self) { idx in
                                 VStack {
-                                    Text("\(parameters.tags[idx])")
+                                    Text("\(parameters.itemsList[idx])")
                                     Image(systemName: checkedBool[idx] ? "checkmark.square.fill" : "square")
                                         .foregroundColor(checkedBool[idx] ? Color(UIColor.systemBlue) : Color.secondary)
                                         .onTapGesture {
@@ -75,7 +75,7 @@ struct CheckBoxMD: View {
         .cornerRadius(20)
         .frame(width: 350, height: 150, alignment: .center)
         .onAppear {
-            checkedBool = Array(repeating: false, count: parameters.tags.count)
+            checkedBool = Array(repeating: false, count: parameters.itemsList.count)
             inteliLock = false
         }
     }
@@ -99,7 +99,8 @@ struct CheckBoxMD: View {
 
 struct CheckBoxMD_Previews: PreviewProvider {
     static var previews: some View {
-        CheckBoxMD(parameters: STCF_checkBox(title: "Multimedia AG (o turbiedad)", quantity: 2, tags: ["OK","IRREGULAR"], NumAccepted: 1))
+        CheckBoxMD(parameters: STCF_checkBox(title: "Desasolvar", itemsQuantity: 2, itemsList: ["tag1","tag2"], itemsMaxToSelect: 1, modifiers: [ENMF_Keys.required]))
+        //(parameters: STCF_checkBox(title: "Multimedia AG (o turbiedad)", quantity: 2, tags: ["OK","IRREGULAR"], NumAccepted: 1))
     }
 }
 

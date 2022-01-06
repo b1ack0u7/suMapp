@@ -18,34 +18,24 @@ struct SettingsVW: View {
     
     @Binding var showLogin:Bool
     @Binding var tabIndex:Int
-    @State private var showConfirm:Bool = false
+    @State private var showAlert:Bool = false
     
     var body: some View {
         ZStack {
             Color("ITF BG")
                 .ignoresSafeArea()
             Button(action: {
-                showConfirm = true
+                showAlert = true
             }, label: {
                 VStack {
                     Text("Cerrar sesión")
                 }
             })
         }
-        .alert(isPresented: $showConfirm, content: { confirmChange })
-    }
-    
-    var confirmChange: Alert {
-        Alert(title: Text("¿Desea cerrar sesión?"), message: Text("La aplicacion se cerrara y se guardara todos los datos"),
-            primaryButton: .default (Text("Si")) {
-            withAnimation(.easeInOut) {
-                clearData()
-                tabIndex = 0
-                showLogin.toggle()
-            }
-            },
-            secondaryButton: .cancel(Text("No"))
-        )
+        .alert("¿Desea cerrar sesión?", isPresented: $showAlert) {
+            Button("Si") {}
+            Button("No", role: .cancel) {}
+        }
     }
     
     private func clearData() {
@@ -56,7 +46,6 @@ struct SettingsVW: View {
         //TransferableData
         dataTrans.regions = []
         dataTrans.sections = []
-        dataTrans.dataForm = []
         
         //CoreData
         for data in items {
