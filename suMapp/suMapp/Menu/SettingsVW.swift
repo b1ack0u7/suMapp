@@ -33,7 +33,7 @@ struct SettingsVW: View {
             })
         }
         .alert("¿Desea cerrar sesión?", isPresented: $showAlert) {
-            Button("Si") {}
+            Button("Si") {clearData()}
             Button("No", role: .cancel) {}
         }
     }
@@ -53,7 +53,9 @@ struct SettingsVW: View {
         }
         do {
             try viewContext.save()
-            print("CoreData Cleared")
+            print("CoreData: Cleared")
+            showLogin = false
+            tabIndex = 0
         } catch let error as NSError {
             print("DBG: API error: ",error.localizedDescription)
         }

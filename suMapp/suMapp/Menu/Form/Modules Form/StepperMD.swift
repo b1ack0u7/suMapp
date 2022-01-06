@@ -89,7 +89,7 @@ struct StepperMD: View, KeyboardReadable {
             }
         })
         .onAppear {
-            if(parameters.modifiers.contains(ENMF_Keys.nolimit)) {
+            if(!parameters.modifiers.contains(ENMF_Keys.nolimit)) {
                 numMin = parameters.itemRange[0]
                 numMax = parameters.itemRange[1]
                 myNumber = Double(numMin)

@@ -29,7 +29,7 @@
 }
 
 
-{"user":"axel", "pass":"123", "api":"https://run.mocky.io/v3/27e030a8-9ab5-481f-b932-a10e24d6ba62"}
+{"user":"axel", "pass":"123", "api":"https://run.mocky.io/v3/817cbdd1-33a2-4187-b8aa-a90d5fae040c"}
 
 {
   "regions": ["Bajio","Norte","Occidente"],
@@ -164,8 +164,10 @@
         {
           "functype": "stepper",
           "title": "Retrolavado carbon",
+          "itemRange": [],
+          "step": 1,
           "numberFormat": "%.0f",
-          "modifiers": ["#Optional"]
+          "modifiers": ["#Nolimit","#Optional"]
         }
       ]
     },

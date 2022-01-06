@@ -58,7 +58,7 @@ public class SectionsDataForm: NSObject, NSSecureCoding, Decodable {
         let mItemsList = coder.decodeObject(of: [NSArray.self, NSString.self], forKey: Keys.itemsList.rawValue) ?? [""]
         let mItemRange = coder.decodeObject(of: [NSArray.self, NSNumber.self], forKey: Keys.itemRange.rawValue) ?? [0.0,0.0]
         let mItemsMaxToSelect = coder.decodeObject(of: NSNumber.self, forKey: Keys.itemsMaxToSelect.rawValue) ?? 1
-        let mStep = coder.decodeObject(of: NSNumber.self, forKey: Keys.step.rawValue) ?? 0
+        let mStep = coder.decodeObject(of: NSNumber.self, forKey: Keys.step.rawValue) ?? 1
         let mNumberFormat = coder.decodeObject(of: NSString.self, forKey: Keys.numberFormat.rawValue) ?? "%.0f"
         let mModifiers = coder.decodeObject(of: [NSArray.self, NSString.self], forKey: Keys.modifiers.rawValue) ?? ["#None"]
         

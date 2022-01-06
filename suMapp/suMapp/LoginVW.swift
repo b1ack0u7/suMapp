@@ -29,7 +29,7 @@ struct LoginVW: View {
     @State private var showError:Bool = false
     @State private var verboseLoading:String = ""
     
-    private let apiURL:String = "https://run.mocky.io/v3/402f876a-4d53-429b-a307-9f058ba41e5d"
+    private let apiURL:String = "https://run.mocky.io/v3/1c3cea67-0f25-4c35-8a46-53a71599ebd9"
     
     var body: some View {
         ZStack {
@@ -226,7 +226,7 @@ struct LoginVW: View {
         
         do {
             try viewContext.save()
-            print("Data saved")
+            print("CoreData: Data saved")
             
             UserDefaults.standard.set(true, forKey: "isLogged")
             UserDefaults.standard.set(userData.api, forKey: "api")
