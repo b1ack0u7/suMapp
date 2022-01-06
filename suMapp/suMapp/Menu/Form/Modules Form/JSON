@@ -29,7 +29,7 @@
 }
 
 
-{"user":"axelmontes@hotmail.com", "pass":"123456", "api":"https://run.mocky.io/v3/eff14de3-b2be-402e-9a49-6bef4e9a0be1"}
+{"user":"axel", "pass":"123", "api":"https://run.mocky.io/v3/27e030a8-9ab5-481f-b932-a10e24d6ba62"}
 
 {
   "regions": ["Bajio","Norte","Occidente"],
@@ -42,8 +42,9 @@
           "title": "Sucursales",
           "itemsQuantity": 5,
           "itemsList": ["Sucursal1", "Sucursal2", "Sucursal3", "Sucursal4", "Sucursal5"],
+          
           "itemsMaxToSelect": 1,
-          "modifiers": []
+          "modifiers": ["#Required"]
         },
         {
           "functype": "checkBox",
@@ -51,7 +52,7 @@
           "itemsQuantity": 2,
           "itemsList": ["Si","No"],
           "itemsMaxToSelect": 1,
-          "modifiers": []
+          "modifiers": ["#Required"]
         },
         {
           "functype": "checkBox",
@@ -59,7 +60,7 @@
           "itemsQuantity": 2,
           "itemsList": ["Si","No"],
           "itemsMaxToSelect": 1,
-          "modifiers": []
+          "modifiers": ["#Required"]
         },
         {
           "functype": "checkBox",
@@ -67,27 +68,27 @@
           "itemsQuantity": 2,
           "itemsList": ["Si","No"],
           "itemsMaxToSelect": 1,
-          "modifiers": []
+          "modifiers": ["#Required"]
         },
         {
           "functype": "photo",
           "title": "Evidencia Bypass agua cruda",
-          "modifiers": []
+          "modifiers": ["#Required"]
         },
         {
           "functype": "photo",
           "title": "Evidencia bypass agua filtrada",
-          "modifiers": []
+          "modifiers": ["#Required"]
         },
         {
           "functype": "photo",
           "title": "Evidencia bypass agua producto",
-          "modifiers": []
+          "modifiers": ["#Required"]
         },
         {
           "functype": "photo",
           "title": "Foto de pizarra",
-          "modifiers": []
+          "modifiers": ["#Required"]
         }
       ]
     },
@@ -100,7 +101,7 @@
           "itemsQuantity": 2,
           "itemsList": ["Ok","Irregular"],
           "itemsMaxToSelect": 1,
-          "modifiers": []
+          "modifiers": ["#Required"]
         },
         {
           "functype": "checkBox",
@@ -108,7 +109,7 @@
           "itemsQuantity": 2,
           "itemsList": ["Ok","Irregular"],
           "itemsMaxToSelect": 1,
-          "modifiers": []
+          "modifiers": ["#Required"]
         },
         {
           "functype": "checkBox",
@@ -116,7 +117,7 @@
           "itemsQuantity": 2,
           "itemsList": ["Ok","Irregular"],
           "itemsMaxToSelect": 1,
-          "modifiers": []
+          "modifiers": ["#Required"]
         },
         {
           "functype": "listField",
@@ -124,12 +125,12 @@
           "itemsQuantity": 3,
           "itemsList": ["Un tercio", "Dos tercios", "Tres tercios"],
           "itemsMaxToSelect": 1,
-          "modifiers": []
+          "modifiers": ["#Required"]
         },
         {
           "functype": "photo",
           "title": "Evidencia de Sal Inicial",
-          "modifiers": []
+          "modifiers": ["#Required"]
         },
         {
           "functype": "listField",
@@ -145,12 +146,12 @@
           "itemsQuantity": 3,
           "itemsList": ["Un tercio", "Dos tercios", "Tres tercios"],
           "itemsMaxToSelect": 1,
-          "modifiers": []
+          "modifiers": ["#Required"]
         },
         {
           "functype": "photo",
           "title": "Evidencia de Sal Final",
-          "modifiers": []
+          "modifiers": ["#Required"]
         },
         {
           "functype": "stepper",
@@ -173,7 +174,8 @@
       "dataform": [
         {
           "functype": "divider",
-          "title": "Agua cruda"
+          "title": "Agua cruda",
+          "modifiers": ["#None"]
         },
         {
           "functype": "stepper",
@@ -217,7 +219,8 @@
         },
         {
           "functype": "photo",
-          "title": "Evidencia TDS agua cruda"
+          "title": "Evidencia TDS agua cruda",
+          "modifiers": ["#Required"]
         },
         {
           "functype": "stepper",
@@ -238,7 +241,7 @@
           "itemsQuantity": 2,
           "itemsList": ["Si","No"],
           "itemsMaxToSelect": 1,
-          "modifiers": []
+          "modifiers": ["#Required"]
         },
         {
           "functype": "checkBox",
@@ -246,7 +249,7 @@
           "itemsQuantity": 2,
           "itemsList": ["Si","No"],
           "itemsMaxToSelect": 1,
-          "modifiers": []
+          "modifiers": ["#Required"]
         },
         {
           "functype": "checkBox",
@@ -254,7 +257,7 @@
           "itemsQuantity": 2,
           "itemsList": ["Si","No"],
           "itemsMaxToSelect": 1,
-          "modifiers": []
+          "modifiers": ["#Required"]
         },
         {
           "functype": "checkBox",
@@ -262,7 +265,7 @@
           "itemsQuantity": 2,
           "itemsList": ["Si","No"],
           "itemsMaxToSelect": 1,
-          "modifiers": []
+          "modifiers": ["#Required"]
         },
         {
           "functype": "checkBox",
@@ -270,7 +273,7 @@
           "itemsQuantity": 2,
           "itemsList": ["Si","No"],
           "itemsMaxToSelect": 1,
-          "modifiers": []
+          "modifiers": ["#Required"]
         }
       ]
     },
@@ -283,7 +286,7 @@
           "itemsQuantity": 2,
           "itemsList": ["Ok","Irregular"],
           "itemsMaxToSelect": 1,
-          "modifiers": []
+          "modifiers": ["#Required"]
         },
         {
           "functype": "checkBox",
@@ -291,7 +294,7 @@
           "itemsQuantity": 2,
           "itemsList": ["Ok","Irregular"],
           "itemsMaxToSelect": 1,
-          "modifiers": []
+          "modifiers": ["#Required"]
         },
         {
           "functype": "checkBox",
@@ -299,11 +302,12 @@
           "itemsQuantity": 2,
           "itemsList": ["Ok","Irregular"],
           "itemsMaxToSelect": 1,
-          "modifiers": []
+          "modifiers": ["#Required"]
         },
         {
           "functype": "photo",
-          "title": "Evidencia final"
+          "title": "Evidencia final",
+          "modifiers": ["#Required"]
         }
       ]
     }

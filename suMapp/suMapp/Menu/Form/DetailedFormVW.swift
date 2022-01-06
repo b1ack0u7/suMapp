@@ -95,11 +95,12 @@ struct DetailedFormVW: View {
             UIToolbar.appearance().barTintColor = UIColor.systemGray5
             for i in 0..<dataForm.count {
                 let cnt = dataForm[i]
+                let mod = cnt.modifiers.map {ENMF_Keys(rawValue: $0)}
                 
                 switch (Keys(rawValue: cnt.functype)) {
                 case .checkBox:
                     //Titulo : Cantidad de checks : Nombre de las checks {data1,data2} : Cantidad maxima a seleccionar
-                    dataContainer.append(STCF_container(checkBox: STCF_checkBox(title: cnt.title, itemsQuantity: cnt.itemsQuantity!, itemsList: cnt.itemsList!, itemsMaxToSelect: cnt.itemsMaxToSelect!, modifiers: cnt.modifiers)))
+                    dataContainer.append(STCF_container(checkBox: STCF_checkBox(title: cnt.title, itemsQuantity: cnt.itemsQuantity!, itemsList: cnt.itemsList!, itemsMaxToSelect: cnt.itemsMaxToSelect!, modifiers: mod)))
                     //print("DBGN: check")
                 
                 case .textField:
@@ -108,17 +109,17 @@ struct DetailedFormVW: View {
                 
                 case .listField:
                     //Titulo : Cantidad de items : {Lista de items || #Sequence -> 1..<N} : Cantidad maxima a seleccionar : {#Optional || #Required = default}
-                    dataContainer.append(STCF_container(listField: STCF_listField(title: cnt.title, itemsQuantity: cnt.itemsQuantity!, itemsList: cnt.itemsList!, itemsMaxToSelect: cnt.itemsMaxToSelect!, modifiers: cnt.modifiers)))
+                    dataContainer.append(STCF_container(listField: STCF_listField(title: cnt.title, itemsQuantity: cnt.itemsQuantity!, itemsList: cnt.itemsList!, itemsMaxToSelect: cnt.itemsMaxToSelect!, modifiers: mod)))
                     //print("DBGN: list")
                 
                 case .photo:
                     //Titulo : {#Optional || #Required = default}
-                    dataContainer.append(STCF_container(camera: STCF_camera(title: cnt.title, modifier: cnt.modifiers)))
+                    dataContainer.append(STCF_container(camera: STCF_camera(title: cnt.title, modifier: mod)))
                     //print("DBGN: photo")
                 
                 case .stepper:
                     //Titulo : {#Nolimit -> 0..<N || Lista -> 0,N} : Paso a dar : Formato de numero {%.0f = default} : {#Optional || #Required = default}
-                    dataContainer.append(STCF_container(stepper: STCF_stepper(title: cnt.title, itemRange: cnt.itemRange!, step: cnt.step!, numberFormat: cnt.numberFormat ?? "%.0f", modifiers: cnt.modifiers)))
+                    dataContainer.append(STCF_container(stepper: STCF_stepper(title: cnt.title, itemRange: cnt.itemRange!, step: cnt.step!, numberFormat: cnt.numberFormat!, modifiers: mod)))
                     //print("DBGN: stepper")
                 
                 case .divider:

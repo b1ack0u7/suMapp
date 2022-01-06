@@ -25,7 +25,7 @@ public class SectionsDataForm: NSObject, NSSecureCoding, Decodable {
     let itemsMaxToSelect:Int?
     let step:Double?
     let numberFormat:String?
-    let modifiers:[ENMF_Keys]
+    let modifiers:[String]
     
     enum Keys:String {
         case functype = "functype"
@@ -39,7 +39,7 @@ public class SectionsDataForm: NSObject, NSSecureCoding, Decodable {
         case modifiers = "modifiers"
     }
     
-    init(functype:String, title:String, itemsQuantity:Int, itemsList:[String], itemRange:[Double], itemsMaxToSelect:Int, step:Double, numberFormat:String, modifiers:[ENMF_Keys]) {
+    init(functype:String, title:String, itemsQuantity:Int, itemsList:[String], itemRange:[Double], itemsMaxToSelect:Int, step:Double, numberFormat:String, modifiers:[String]) {
         self.functype = functype
         self.title = title
         self.itemsQuantity = itemsQuantity
@@ -54,15 +54,15 @@ public class SectionsDataForm: NSObject, NSSecureCoding, Decodable {
     public required convenience init?(coder: NSCoder) {
         let mFunctype = coder.decodeObject(of: NSString.self, forKey: Keys.functype.rawValue)! as String
         let mTitle = coder.decodeObject(of: NSString.self, forKey: Keys.title.rawValue)! as String
-        let mItemsQuantity = coder.decodeObject(of: NSNumber.self, forKey: Keys.itemsQuantity.rawValue) as! Int
-        let mItemsList = coder.decodeObject(of: [NSArray.self, NSString.self], forKey: Keys.itemsList.rawValue) as! [String]
-        let mItemRange = coder.decodeObject(of: [NSArray.self, NSNumber.self], forKey: Keys.itemRange.rawValue) as! [Double]
-        let mItemsMaxToSelect = coder.decodeObject(of: NSNumber.self, forKey: Keys.itemsMaxToSelect.rawValue) as! Int
-        let mStep = coder.decodeObject(of: NSNumber.self, forKey: Keys.step.rawValue) as! Double
-        let mNumberFormat = coder.decodeObject(of: NSString.self, forKey: Keys.numberFormat.rawValue)! as String
-        let mModifiers = coder.decodeObject(of: [NSArray.self, NSEnumerator.self], forKey: Keys.modifiers.rawValue) as! [ENMF_Keys]
+        let mItemsQuantity = coder.decodeObject(of: NSNumber.self, forKey: Keys.itemsQuantity.rawValue) ?? 0
+        let mItemsList = coder.decodeObject(of: [NSArray.self, NSString.self], forKey: Keys.itemsList.rawValue) ?? [""]
+        let mItemRange = coder.decodeObject(of: [NSArray.self, NSNumber.self], forKey: Keys.itemRange.rawValue) ?? [0.0,0.0]
+        let mItemsMaxToSelect = coder.decodeObject(of: NSNumber.self, forKey: Keys.itemsMaxToSelect.rawValue) ?? 1
+        let mStep = coder.decodeObject(of: NSNumber.self, forKey: Keys.step.rawValue) ?? 0
+        let mNumberFormat = coder.decodeObject(of: NSString.self, forKey: Keys.numberFormat.rawValue) ?? "%.0f"
+        let mModifiers = coder.decodeObject(of: [NSArray.self, NSString.self], forKey: Keys.modifiers.rawValue) ?? ["#None"]
         
-        self.init(functype: mFunctype, title: mTitle, itemsQuantity: mItemsQuantity, itemsList: mItemsList, itemRange: mItemRange, itemsMaxToSelect: mItemsMaxToSelect, step: mStep, numberFormat: mNumberFormat, modifiers: mModifiers)
+        self.init(functype: mFunctype, title: mTitle, itemsQuantity: mItemsQuantity as! Int, itemsList: mItemsList as! [String], itemRange: mItemRange as! [Double], itemsMaxToSelect: mItemsMaxToSelect as! Int, step: mStep as! Double, numberFormat: mNumberFormat as String, modifiers: mModifiers as! [String])
     }
     
     public func encode(with coder: NSCoder) {

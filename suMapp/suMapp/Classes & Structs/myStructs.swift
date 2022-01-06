@@ -7,35 +7,6 @@
 
 import Foundation
 
-struct STCdataApi: Decodable {
-    var regions:[STCinnerRegionAPI]?
-    var sections:[STCinnerSectionAPI]?
-}
-
-struct STCinnerRegionAPI: Decodable {
-    let name:String
-}
-
-struct STCinnerSectionAPI: Decodable {
-    let name:String
-    let dataform:[STCinnerDataFormAPI]
-}
-
-struct STCinnerDataFormAPI: Identifiable, Decodable {
-    var id = UUID()
-    let functype: String
-    let parameters: String
-    
-    private enum CodingKeys: String, CodingKey {case functype, parameters}
-}
-
-struct STCform:Identifiable {
-    var id = UUID()
-    let functype:String
-    let parameters:String
-    var results:String?
-}
-
 //DataTrans
 struct STCdataTrans {
     var regions:[String] = []
@@ -66,7 +37,7 @@ struct STCF_checkBox {
     let itemsQuantity:Int
     let itemsList:[String]
     let itemsMaxToSelect:Int
-    let modifiers:[ENMF_Keys]
+    let modifiers:[ENMF_Keys?]
 }
 
 //List Field
@@ -75,7 +46,7 @@ struct STCF_listField {
     let itemsQuantity: Int
     let itemsList:[String]
     let itemsMaxToSelect:Int
-    let modifiers:[ENMF_Keys]
+    let modifiers:[ENMF_Keys?]
 }
 
 //Stepper
@@ -84,11 +55,11 @@ struct STCF_stepper {
     let itemRange:[Double]
     let step:Double
     let numberFormat:String
-    let modifiers:[ENMF_Keys]
+    let modifiers:[ENMF_Keys?]
 }
 
 //Camera
 struct STCF_camera {
     let title:String
-    let modifier:[ENMF_Keys]
+    let modifier:[ENMF_Keys?]
 }
