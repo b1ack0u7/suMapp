@@ -11,22 +11,21 @@ import UIKit
 
 class CLSDataTrans: ObservableObject {
     @Published var regions:[String] = []
-    @Published var sections:[String] = []
-    @Published var dataForm:[[STCform]] = []
+    @Published var sections:[Sections] = []
 }
 
-public class RSecc: NSObject, NSSecureCoding, Decodable {
+public class SectionsDataForm: NSObject, NSSecureCoding, Decodable {
     public static var supportsSecureCoding: Bool = true
     
     let functype:String
     let title:String
     let itemsQuantity:Int?
     let itemsList:[String]?
-    let itemRange:[Float]?
+    let itemRange:[Double]?
     let itemsMaxToSelect:Int?
-    let step:Float?
+    let step:Double?
     let numberFormat:String?
-    let modifiers:[String]?
+    let modifiers:[ENMF_Keys]
     
     enum Keys:String {
         case functype = "functype"
@@ -40,7 +39,7 @@ public class RSecc: NSObject, NSSecureCoding, Decodable {
         case modifiers = "modifiers"
     }
     
-    init(functype:String, title:String, itemsQuantity:Int, itemsList:[String], itemRange:[Float], itemsMaxToSelect:Int, step:Float, numberFormat:String, modifiers:[String]) {
+    init(functype:String, title:String, itemsQuantity:Int, itemsList:[String], itemRange:[Double], itemsMaxToSelect:Int, step:Double, numberFormat:String, modifiers:[ENMF_Keys]) {
         self.functype = functype
         self.title = title
         self.itemsQuantity = itemsQuantity
@@ -57,11 +56,11 @@ public class RSecc: NSObject, NSSecureCoding, Decodable {
         let mTitle = coder.decodeObject(of: NSString.self, forKey: Keys.title.rawValue)! as String
         let mItemsQuantity = coder.decodeObject(of: NSNumber.self, forKey: Keys.itemsQuantity.rawValue) as! Int
         let mItemsList = coder.decodeObject(of: [NSArray.self, NSString.self], forKey: Keys.itemsList.rawValue) as! [String]
-        let mItemRange = coder.decodeObject(of: [NSArray.self, NSNumber.self], forKey: Keys.itemRange.rawValue) as! [Float]
+        let mItemRange = coder.decodeObject(of: [NSArray.self, NSNumber.self], forKey: Keys.itemRange.rawValue) as! [Double]
         let mItemsMaxToSelect = coder.decodeObject(of: NSNumber.self, forKey: Keys.itemsMaxToSelect.rawValue) as! Int
-        let mStep = coder.decodeObject(of: NSNumber.self, forKey: Keys.step.rawValue) as! Float
+        let mStep = coder.decodeObject(of: NSNumber.self, forKey: Keys.step.rawValue) as! Double
         let mNumberFormat = coder.decodeObject(of: NSString.self, forKey: Keys.numberFormat.rawValue)! as String
-        let mModifiers = coder.decodeObject(of: [NSArray.self, NSString.self], forKey: Keys.modifiers.rawValue) as! [String]
+        let mModifiers = coder.decodeObject(of: [NSArray.self, NSEnumerator.self], forKey: Keys.modifiers.rawValue) as! [ENMF_Keys]
         
         self.init(functype: mFunctype, title: mTitle, itemsQuantity: mItemsQuantity, itemsList: mItemsList, itemRange: mItemRange, itemsMaxToSelect: mItemsMaxToSelect, step: mStep, numberFormat: mNumberFormat, modifiers: mModifiers)
     }
@@ -79,25 +78,25 @@ public class RSecc: NSObject, NSSecureCoding, Decodable {
     }
 }
 
-public class RSections: NSObject, NSSecureCoding, Decodable {
+public class Sections: NSObject, NSSecureCoding, Decodable {
     public static var supportsSecureCoding: Bool = true
     
     let name:String
-    let dataform:[RSecc]
+    let dataform:[SectionsDataForm]
     
     enum Keys:String {
         case name = "name"
         case dataform = "dataform"
     }
     
-    init(name:String, dataform:[RSecc]) {
+    init(name:String, dataform:[SectionsDataForm]) {
         self.name = name
         self.dataform = dataform
     }
     
     public required convenience init?(coder: NSCoder) {
         let mName = coder.decodeObject(of: NSString.self, forKey: Keys.name.rawValue)! as String
-        let mDataForm = coder.decodeObject(of: [NSArray.self, RSecc.self], forKey: Keys.dataform.rawValue) as! [RSecc]
+        let mDataForm = coder.decodeObject(of: [NSArray.self, SectionsDataForm.self], forKey: Keys.dataform.rawValue) as! [SectionsDataForm]
         
         self.init(name: mName, dataform: mDataForm)
     }
@@ -108,25 +107,25 @@ public class RSections: NSObject, NSSecureCoding, Decodable {
     }
 }
 
-public class myTest: NSObject, NSSecureCoding, Decodable {
+public class Cforms: NSObject, NSSecureCoding, Decodable {
     public static var supportsSecureCoding: Bool = true
     
     var regions:[String]
-    var sections:[RSections]
+    var sections:[Sections]
     
     enum Keys:String {
         case regions = "regions"
         case sections = "sections"
     }
     
-    init(regions:[String], sections:[RSections]) {
+    init(regions:[String], sections:[Sections]) {
         self.regions = regions
         self.sections = sections
     }
     
     public required convenience init?(coder: NSCoder) {
         let mRegions = coder.decodeObject(of: [NSArray.self, NSString.self], forKey: Keys.regions.rawValue) as! [String]
-        let mSections = coder.decodeObject(of: [NSArray.self, RSections.self], forKey: Keys.sections.rawValue) as! [RSections]
+        let mSections = coder.decodeObject(of: [NSArray.self, Sections.self], forKey: Keys.sections.rawValue) as! [Sections]
         
         self.init(regions: mRegions, sections: mSections)
     }
@@ -137,121 +136,9 @@ public class myTest: NSObject, NSSecureCoding, Decodable {
     }
 }
 
-
-
-
-
-
-
-public class myForm: NSObject, NSSecureCoding {
-    public static var supportsSecureCoding: Bool = true
-    
-    var functype:String
-    var parameters:String
-    
-    enum Keys:String {
-        case functype = "functype"
-        case parameters = "parameters"
-    }
-    
-    init(functype:String, parameters:String) {
-        self.functype = functype
-        self.parameters = parameters
-    }
-    
-    public required convenience init?(coder: NSCoder) {
-        let mFunctype = coder.decodeObject(of: NSString.self, forKey: Keys.functype.rawValue)! as String
-        let mParameters = coder.decodeObject(of: NSString.self, forKey: Keys.parameters.rawValue)! as String
-        
-        self.init(functype: mFunctype, parameters: mParameters)
-    }
-    
-    public func encode(with coder: NSCoder) {
-        coder.encode(functype, forKey: Keys.functype.rawValue)
-        coder.encode(parameters, forKey: Keys.parameters.rawValue)
-    }
-}
-
-public class mySection: NSObject, NSSecureCoding {
-    public static var supportsSecureCoding: Bool = true
-    
-    let name:String
-    let form:[myForm]
-    
-    enum Keys:String {
-        case name = "name"
-        case form = "form"
-    }
-    
-    init(name:String, form:[myForm]) {
-        self.name = name
-        self.form = form
-    }
-    
-    public required convenience init?(coder: NSCoder) {
-        let mSection = coder.decodeObject(of: NSString.self, forKey: Keys.name.rawValue)! as String
-        let mForm = coder.decodeObject(of: [NSArray.self, myForm.self], forKey: Keys.form.rawValue) as! [myForm]
-        
-        self.init(name: mSection, form: mForm)
-    }
-    
-    public func encode(with coder: NSCoder) {
-        coder.encode(name, forKey: Keys.name.rawValue)
-        coder.encode(form, forKey: Keys.form.rawValue)
-    }
-}
-
-public class Sections: NSObject, NSSecureCoding {
-    public static var supportsSecureCoding: Bool = true
-    
-    let sections:[mySection]
-    
-    enum Key:String {
-        case sections = "sections"
-    }
-    
-    init(sections:[mySection]) {
-        self.sections = sections
-    }
-    
-    public required convenience init?(coder: NSCoder) {
-        let mSections = coder.decodeObject(of: [NSArray.self, mySection.self], forKey: Key.sections.rawValue) as! [mySection]
-        
-        self.init(sections: mSections)
-    }
-    
-    public func encode(with coder: NSCoder) {
-        coder.encode(sections, forKey: Key.sections.rawValue)
-    }
-}
-
-public class Regions: NSObject, NSSecureCoding {
-    public static var supportsSecureCoding: Bool = true
-    
-    let region:[String]
-    
-    enum Key:String {
-        case region = "region"
-    }
-    
-    init(region:[String]) {
-        self.region = region
-    }
-    
-    public required convenience init?(coder: NSCoder) {
-        let mRegions = coder.decodeObject(of: [NSArray.self, NSString.self], forKey: Key.region.rawValue) as! [String]
-        
-        self.init(region: mRegions)
-    }
-    
-    public func encode(with coder: NSCoder) {
-        coder.encode(region, forKey: Key.region.rawValue)
-    }
-}
-
 class DBAttributeTransformer: NSSecureUnarchiveFromDataTransformer {
     override static var allowedTopLevelClasses: [AnyClass] {
-        [Regions.self, Sections.self, myTest.self]
+        [Cforms.self]
     }
     
     static func register() {

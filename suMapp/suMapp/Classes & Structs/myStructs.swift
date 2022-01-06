@@ -39,8 +39,7 @@ struct STCform:Identifiable {
 //DataTrans
 struct STCdataTrans {
     var regions:[String] = []
-    var sections:[String] = []
-    var dataForm:[[STCform]] = []
+    var sections:[Cforms] = []
 }
 
 
@@ -64,31 +63,32 @@ struct STCF_container {
 //Check Box
 struct STCF_checkBox {
     let title:String
-    let quantity:Int
-    let tags:[String]
-    let NumAccepted:Int
+    let itemsQuantity:Int
+    let itemsList:[String]
+    let itemsMaxToSelect:Int
+    let modifiers:[ENMF_Keys]
 }
 
 //List Field
 struct STCF_listField {
     let title:String
-    let quantity:Int
-    let tags:[String]
-    let NumAccepted:Int
-    let modifier:ENMF_Keys
+    let itemsQuantity: Int
+    let itemsList:[String]
+    let itemsMaxToSelect:Int
+    let modifiers:[ENMF_Keys]
 }
 
 //Stepper
 struct STCF_stepper {
     let title:String
-    let tags:String
+    let itemRange:[Double]
     let step:Double
-    let formatt:String
-    let modifier:ENMF_Keys
+    let numberFormat:String
+    let modifiers:[ENMF_Keys]
 }
 
 //Camera
 struct STCF_camera {
     let title:String
-    let modifier:ENMF_Keys
+    let modifier:[ENMF_Keys]
 }

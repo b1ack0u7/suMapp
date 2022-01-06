@@ -14,8 +14,7 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         let newItem = Item(context: viewContext)
-        newItem.regions = Regions(region: ["Region1","Region2","Region3"])
-        newItem.sections = Sections(sections: [mySection(name: "Sec1", form: [myForm(functype: "Type1", parameters: "param")])])
+        newItem.forms = Cforms(regions: ["Region1"], sections: [Sections(name: "Seccion 1", dataform: [SectionsDataForm(functype: "photo", title: "Camera", itemsQuantity: 0, itemsList: [""], itemRange: [0.0], itemsMaxToSelect: 0, step: 0.0, numberFormat: "", modifiers: [ENMF_Keys.required])])])
         
         do {
             try viewContext.save()

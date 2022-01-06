@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct DetailedFormVW: View {
-    let region:String
-    @State var dataForm:[STCform]
+    let selectedRegion:String
+    @State var dataForm:[SectionsDataForm]
     
     private enum Keys:String {
         case checkBox = "checkBox"
@@ -94,12 +94,12 @@ struct DetailedFormVW: View {
         .onAppear {
             UIToolbar.appearance().barTintColor = UIColor.systemGray5
             for i in 0..<dataForm.count {
-                let separated = dataForm[i].parameters.components(separatedBy: ":")
+                let cnt = dataForm[i]
                 
-                switch (Keys(rawValue: dataForm[i].functype)) {
+                switch (Keys(rawValue: cnt.functype)) {
                 case .checkBox:
                     //Titulo : Cantidad de checks : Nombre de las checks {data1,data2} : Cantidad maxima a seleccionar
-                    dataContainer.append(STCF_container(checkBox: STCF_checkBox(title: separated[0], quantity: Int(separated[1])!, tags: separated[2].components(separatedBy: ","), NumAccepted: Int(separated[3])!)))
+                    dataContainer.append(STCF_container(checkBox: STCF_checkBox(title: cnt.title, itemsQuantity: cnt.itemsQuantity!, itemsList: cnt.itemsList!, itemsMaxToSelect: cnt.itemsMaxToSelect!, modifiers: cnt.modifiers)))
                     //print("DBGN: check")
                 
                 case .textField:
@@ -108,17 +108,17 @@ struct DetailedFormVW: View {
                 
                 case .listField:
                     //Titulo : Cantidad de items : {Lista de items || #Sequence -> 1..<N} : Cantidad maxima a seleccionar : {#Optional || #Required = default}
-                    dataContainer.append(STCF_container(listField: STCF_listField(title: separated[0], quantity: Int(separated[1])!, tags: separated[2].components(separatedBy: ","), NumAccepted: Int(separated[3])!, modifier: ENMF_Keys(rawValue: separated[safe: 4] ?? ENMF_Keys.required.rawValue)!)))
+                    dataContainer.append(STCF_container(listField: STCF_listField(title: cnt.title, itemsQuantity: cnt.itemsQuantity!, itemsList: cnt.itemsList!, itemsMaxToSelect: cnt.itemsMaxToSelect!, modifiers: cnt.modifiers)))
                     //print("DBGN: list")
                 
                 case .photo:
                     //Titulo : {#Optional || #Required = default}
-                    dataContainer.append(STCF_container(camera: STCF_camera(title: separated[0], modifier: ENMF_Keys(rawValue: separated[safe:1] ?? ENMF_Keys.required.rawValue)!)))
+                    dataContainer.append(STCF_container(camera: STCF_camera(title: cnt.title, modifier: cnt.modifiers)))
                     //print("DBGN: photo")
                 
                 case .stepper:
                     //Titulo : {#Nolimit -> 0..<N || Lista -> 0,N} : Paso a dar : Formato de numero {%.0f = default} : {#Optional || #Required = default}
-                    dataContainer.append(STCF_container(stepper: STCF_stepper(title: separated[0], tags: separated[1], step: Double(separated[2])!, formatt: separated[3], modifier: ENMF_Keys(rawValue: separated[safe: 4] ?? ENMF_Keys.required.rawValue)!)))
+                    dataContainer.append(STCF_container(stepper: STCF_stepper(title: cnt.title, itemRange: cnt.itemRange!, step: cnt.step!, numberFormat: cnt.numberFormat ?? "%.0f", modifiers: cnt.modifiers)))
                     //print("DBGN: stepper")
                 
                 case .divider:
@@ -139,10 +139,7 @@ struct DetailedFormVW: View {
 
 struct DetailedFormVW_Previews: PreviewProvider {
     static var previews: some View {
-        DetailedFormVW(region: "Bajio", dataForm: [
-            STCform(functype: "checkBox", parameters: "Multimedia AG (o turbiedad):2:OK,IRREGULAR,Turbio,Neutro,Otro:1"),
-            STCform(functype: "listField", parameters: "Nivel de sal inicial:3:Un tercio,Dos tercios,Tres tercios:1"),
-            STCform(functype: "stepper", parameters: "Cloro libre (PPM) 0.2 - 1.5:0.2,1.5:0.1:%.1f:#Required")])
+        DetailedFormVW(selectedRegion: "Bajio", dataForm: [])
 
             .colorScheme(.dark)
     }

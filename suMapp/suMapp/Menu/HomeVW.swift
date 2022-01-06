@@ -66,7 +66,7 @@ struct HomeVW: View {
         URLSession.shared.dataTask(with: url) {(data, response, _) in
             do {
                 guard let data = data else {return}
-                let decoded = try JSONDecoder().decode(STCdataApi.self, from: data)
+                let decoded = try JSONDecoder().decode(Cforms.self, from: data)
                 DispatchQueue.main.async {
                     updateData(dataForm: decoded)
                 }
@@ -76,67 +76,19 @@ struct HomeVW: View {
         }.resume()
     }
     
-    private func updateData(dataForm:STCdataApi) {
-        DispatchQueue.global(qos: .utility).async {
-            var tmpRegions:[String] = []
-            for i in 0..<dataForm.regions!.count {
-                tmpRegions.append(dataForm.regions![i].name)
-            }
+    private func updateData(dataForm:Cforms) {
+        items[0].forms = dataForm
+        do {
+            try viewContext.save()
+            print("Data updated")
             
-            var tmpSection:[mySection] = []
-            var tmpDataForm:[myForm] = []
-            for i in 0..<dataForm.sections!.count {
-                for j in 0..<dataForm.sections![i].dataform.count {
-                    tmpDataForm.append(myForm(functype: dataForm.sections![i].dataform[j].functype, parameters: dataForm.sections![i].dataform[j].parameters))
-                }
-                tmpSection.append(mySection(name: dataForm.sections![i].name, form: tmpDataForm))
-                tmpDataForm = []
-            }
-            
-            let newRegions:Regions = Regions(region: tmpRegions)
-            let newSections:Sections = Sections(sections: tmpSection)
-            
-            items[0].regions = newRegions
-            items[0].sections = newSections
-            do {
-                try viewContext.save()
-                print("Data updated")
-                setTransferableData()
-            } catch {
-                let nsError = error as NSError
-                fatalError("DBGE: Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-    
-    private func setTransferableData() {
-        DispatchQueue.global(qos: .userInitiated).async {
-            var tmpRegions:[String] = []
-            for i in 0..<items[0].regions!.region.count {
-                tmpRegions.append(items[0].regions!.region[i])
-            }
-            DispatchQueue.main.async {
-                dataTrans.regions = tmpRegions
-            }
+            dataTrans.regions = items[0].forms!.regions
+            dataTrans.sections = items[0].forms!.sections
+        } catch {
+            let nsError = error as NSError
+            fatalError("DBGE: Unresolved error \(nsError), \(nsError.userInfo)")
         }
         
-        DispatchQueue.global(qos: .background).async {
-            var tmpSections:[String] = []
-            var tmpDataFormAUX:[STCform] = []
-            var tmpDataForm:[[STCform]] = []
-            for i in 0..<(items[0].sections?.sections.count)! {
-                tmpSections.append((items[0].sections?.sections[i].name)!)
-                for j in 0..<(items[0].sections?.sections[i].form.count)! {
-                    tmpDataFormAUX.append(STCform(functype: items[0].sections!.sections[i].form[j].functype, parameters: items[0].sections!.sections[i].form[j].parameters))
-                }
-                tmpDataForm.append(tmpDataFormAUX)
-                tmpDataFormAUX = []
-            }
-            DispatchQueue.main.async {
-                dataTrans.sections = tmpSections
-                dataTrans.dataForm = tmpDataForm
-            }
-        }
     }
     
     func getDate() {

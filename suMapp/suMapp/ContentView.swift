@@ -9,20 +9,18 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(entity: Item.entity(), sortDescriptors: [], animation: .default) private var items: FetchedResults<Item>
+    
     var dataTrans = CLSDataTrans()
     @State var isLogged:Bool
     
     @State private var tabIcons:[String] = ["house.fill","text.book.closed.fill","exclamationmark.triangle.fill","gear"]
     @State private var tabIndex:Int = 0
-    @State private var showLogin:Bool = true
     @State private var dataToPass:STCdataTrans = STCdataTrans()
     
     var body: some View {
-        if(showLogin) {
-            LoginVW(isLogged: $isLogged, showLogin: $showLogin, dataToPass: $dataToPass)
-                .transition(AnyTransition.opacity.animation(.easeInOut))
-        }
-        else {
+        if(isLogged) {
             VStack(spacing: 0) {
                 switch tabIndex {
                 case 0:
@@ -32,7 +30,7 @@ struct ContentView: View {
                 case 2:
                     AlertsVW()
                 case 3:
-                    SettingsVW(showLogin: $showLogin, tabIndex: $tabIndex)
+                    SettingsVW(showLogin: $isLogged, tabIndex: $tabIndex)
                 default:
                     Text("")
                 }
@@ -82,10 +80,13 @@ struct ContentView: View {
             .environmentObject(dataTrans)
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .onAppear {
-                dataTrans.regions = dataToPass.regions
-                dataTrans.sections = dataToPass.sections
-                dataTrans.dataForm = dataToPass.dataForm
+                dataTrans.regions = items[0].forms!.regions
+                dataTrans.sections = items[0].forms!.sections
             }
+        }
+        else {
+            LoginVW(showLogin: $isLogged)
+                .transition(AnyTransition.opacity.animation(.easeInOut))
         }
     }
 }

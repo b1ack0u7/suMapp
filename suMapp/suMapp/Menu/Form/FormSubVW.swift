@@ -17,7 +17,7 @@ struct FormSubVW: View {
     var body: some View {
         List {
             ForEach(dataTrans.sections.indices, id:\.self) { idx in
-                NavigationLink(dataTrans.sections[idx], destination: DetailedFormVW(region: dataTrans.sections[idx], dataForm: dataTrans.dataForm[idx]))
+                NavigationLink(dataTrans.sections[idx].name, destination: DetailedFormVW(selectedRegion: selectedRegion, dataForm: dataTrans.sections[idx].dataform))
                     .listRowBackground(Color("ITF Menu"))
             }
         }

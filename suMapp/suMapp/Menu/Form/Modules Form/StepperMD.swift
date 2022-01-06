@@ -25,8 +25,8 @@ struct StepperMD: View, KeyboardReadable {
                 Text("\(parameters.title)")
                     .font(.system(size: 20))
                 
-                if(ENMF_Keys(rawValue: parameters.tags) == ENMF_Keys.nolimit) {
-                    TextField(String(format: parameters.formatt, numberS), text: $numberS)
+                if(parameters.modifiers.contains(ENMF_Keys.nolimit)) {
+                    TextField(String(format: parameters.numberFormat, numberS), text: $numberS)
                         .keyboardType(.decimalPad)
                         .font(.system(size: 18))
                         .padding(.top, 1)
@@ -35,7 +35,7 @@ struct StepperMD: View, KeyboardReadable {
                     
                 }
                 else {
-                    TextField(String(format: parameters.formatt, myNumber), text: $numberS)
+                    TextField(String(format: parameters.numberFormat, myNumber), text: $numberS)
                         .keyboardType(.decimalPad)
                         .font(.system(size: 18))
                         .padding(.top, 1)
@@ -49,7 +49,7 @@ struct StepperMD: View, KeyboardReadable {
                             }
                             else if(tmpNumb > numMax) {
                                 myNumber = numMax
-                                numberS = String(format:parameters.formatt, myNumber)
+                                numberS = String(format:parameters.numberFormat, myNumber)
                             }
                         })
                     
@@ -67,10 +67,10 @@ struct StepperMD: View, KeyboardReadable {
                         in: numMin...numMax,
                         step: parameters.step,
                         onEditingChanged: { _ in
-                            numberS = String(format:parameters.formatt, myNumber)
+                            numberS = String(format:parameters.numberFormat, myNumber)
                         },
-                        minimumValueLabel: Text(String(format: parameters.formatt, numMin)),
-                        maximumValueLabel: Text(String(format: parameters.formatt, numMax)),
+                        minimumValueLabel: Text(String(format: parameters.numberFormat, numMin)),
+                        maximumValueLabel: Text(String(format: parameters.numberFormat, numMax)),
                         label: {Text("")}
                     )
                         .padding([.leading, .trailing], 32)
@@ -85,14 +85,13 @@ struct StepperMD: View, KeyboardReadable {
             print("DBG \(tmpNumb)")
             if(tmpNumb < numMin) {
                 myNumber = numMin
-                numberS = String(format:parameters.formatt, myNumber)
+                numberS = String(format:parameters.numberFormat, myNumber)
             }
         })
         .onAppear {
-            if(ENMF_Keys(rawValue: parameters.tags) != ENMF_Keys.nolimit) {
-                let tags = parameters.tags.components(separatedBy: ",")
-                numMin = Double(tags[0])!
-                numMax = Double(tags[1])!
+            if(parameters.modifiers.contains(ENMF_Keys.nolimit)) {
+                numMin = parameters.itemRange[0]
+                numMax = parameters.itemRange[1]
                 myNumber = Double(numMin)
                 numberS = String(myNumber)
             }
@@ -102,7 +101,8 @@ struct StepperMD: View, KeyboardReadable {
 
 struct StepperMD_Previews: PreviewProvider {
     static var previews: some View {
-        StepperMD(parameters: STCF_stepper(title: "Cantidades", tags: "0.2,1.5", step: 0.1, formatt: "%.1f", modifier: ENMF_Keys.required))
+        StepperMD(parameters: STCF_stepper(title: "Cantidades", itemRange: [0.2,1.5], step: 0.1, numberFormat: "%.1f", modifiers: [ENMF_Keys.required]))
+        //StepperMD(parameters: STCF_stepper(title: "Cantidades", tags: "0.2,1.5", step: 0.1, formatt: "%.1f", modifier: ENMF_Keys.required))
             .colorScheme(.dark)
     }
 }

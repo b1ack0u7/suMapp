@@ -41,7 +41,7 @@ struct ListFieldMD: View {
     @State private var selectionsItem:[String] = []
     
     var body: some View {
-        if(parameters.NumAccepted == 1) {
+        if(parameters.itemsMaxToSelect == 1) {
             //Select only one
             ZStack {
                 Color("ITF Menu")
@@ -68,14 +68,14 @@ struct ListFieldMD: View {
             .cornerRadius(20)
             .frame(width: 350, height: 250, alignment: .center)
             .onAppear {
-                if(ENMF_Keys(rawValue: parameters.tags[0])  == ENMF_Keys.sequence) {
+                if(parameters.modifiers.contains(ENMF_Keys.sequence)) {
                     listFetch = []
-                    for i in 0...parameters.quantity {
+                    for i in 0...parameters.itemsQuantity {
                         listFetch.append(String(i))
                     }
                 }
                 else {
-                    listFetch = parameters.tags
+                    listFetch = parameters.itemsList
                 }
             }
         }
@@ -113,14 +113,14 @@ struct ListFieldMD: View {
             .frame(width: 350, height: 250, alignment: .center)
             .onAppear {
                 UITableView.appearance().backgroundColor = UIColor(Color("ITF Menu"))
-                if(ENMF_Keys(rawValue: parameters.tags[0])  == ENMF_Keys.sequence) {
+                if(parameters.modifiers.contains(ENMF_Keys.sequence)) {
                     listFetch = []
-                    for i in 0...parameters.quantity {
+                    for i in 0...parameters.itemsQuantity {
                         listFetch.append(String(i))
                     }
                 }
                 else {
-                    listFetch = parameters.tags
+                    listFetch = parameters.itemsList
                 }
             }
         }
@@ -130,7 +130,8 @@ struct ListFieldMD: View {
 
 struct ListFieldMD_Previews: PreviewProvider {
     static var previews: some View {
-        ListFieldMD(parameters: STCF_listField(title: "Nivel de sal inicial", quantity: 3, tags: ["Un tercio", "Dos tercios", "Tres tercios"], NumAccepted: 1, modifier: ENMF_Keys.required))
+        ListFieldMD(parameters: STCF_listField(title: "Nivel de sal inicial", itemsQuantity: 3, itemsList: ["Un tercio", "Dos Tercios", "Tres tercios"], itemsMaxToSelect: 1, modifiers: [ENMF_Keys.required]))
+        //ListFieldMD(parameters: STCF_listField(title: "Nivel de sal inicial", quantity: 3, tags: ["Un tercio", "Dos tercios", "Tres tercios"], NumAccepted: 1, modifier: ENMF_Keys.required))
             .colorScheme(.dark)
     }
 }

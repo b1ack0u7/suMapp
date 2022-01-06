@@ -56,7 +56,6 @@ struct SettingsVW: View {
         //TransferableData
         dataTrans.regions = []
         dataTrans.sections = []
-        dataTrans.dataForm = []
         
         //CoreData
         for data in items {
