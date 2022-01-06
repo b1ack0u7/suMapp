@@ -8,8 +8,8 @@
 import SwiftUI
 
 private struct UserData: Decodable {
-    var user:String = ""
-    var pass:String = ""
+    var user:String = "axel"
+    var pass:String = "123"
     var api:String?
 }
 
@@ -33,7 +33,7 @@ struct LoginVW: View {
     @State private var showError:Bool = false
     @State private var verboseLoading:String = ""
     
-    private let apiURL:String = "https://run.mocky.io/v3/90d9a54d-29ea-495f-afbe-cb21a924cc10"
+    private let apiURL:String = "https://run.mocky.io/v3/e7256f8c-2949-4cfb-9d7f-af062236f648"
     
     var body: some View {
         ZStack {
@@ -211,12 +211,26 @@ struct LoginVW: View {
         URLSession.shared.dataTask(with: url) {(data, response, _) in
             do {
                 guard let data = data else {return}
-                let decoded = try JSONDecoder().decode(STCdataApi.self, from: data)
+                let decoded = try JSONDecoder().decode(myTest.self, from: data)
                 DispatchQueue.main.async {
-                    saveData(dataForm: decoded)
+                    //saveData(dataForm: decoded)
+                    for i in 0..<decoded.sections.count {
+                        print("DBG: \(decoded.sections[i].name)")
+                    }
                 }
-            } catch let error as NSError {
-                print("DBG: API error: ",error.localizedDescription)
+            } catch let DecodingError.dataCorrupted(context) {
+                print(context)
+            } catch let DecodingError.keyNotFound(key, context) {
+                print("Key '\(key)' not found:", context.debugDescription)
+                print("codingPath:", context.codingPath)
+            } catch let DecodingError.valueNotFound(value, context) {
+                print("Value '\(value)' not found:", context.debugDescription)
+                print("codingPath:", context.codingPath)
+            } catch let DecodingError.typeMismatch(type, context)  {
+                print("Type '\(type)' mismatch:", context.debugDescription)
+                print("codingPath:", context.codingPath)
+            } catch {
+                print("error: ", error)
             }
         }.resume()
     }

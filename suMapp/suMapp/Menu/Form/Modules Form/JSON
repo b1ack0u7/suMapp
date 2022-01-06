@@ -22,14 +22,14 @@
 {
   "functype": "stepper",
   "title": "Retrolavado",
-  "itemRange": ,
+  "itemRange": [1,5],
   "step": 1,
   "numberFormat": "%.0f",
   "modifiers": []
 }
 
 
-{"user":"axelmontes@hotmail.com", "pass":"123456", "api":"https://run.mocky.io/v3/d6ac74d4-b091-419d-94c3-961553e5f4da"}
+{"user":"axelmontes@hotmail.com", "pass":"123456", "api":"https://run.mocky.io/v3/eff14de3-b2be-402e-9a49-6bef4e9a0be1"}
 
 {
   "regions": ["Bajio","Norte","Occidente"],
